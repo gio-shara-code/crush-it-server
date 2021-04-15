@@ -18,13 +18,22 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = __importStar(require("mongoose"));
-var UserSchema = new mongoose_1.Schema({
-    email: { type: String, required: true },
-    name: { type: String, required: true },
-    password: { type: String, required: true },
-    createdOn: { type: Number, required: true },
-});
-var User = mongoose_1.default.model("User", UserSchema);
-exports.default = User;
+exports.expressLoader = void 0;
+var body_parser_1 = require("body-parser");
+var cors_1 = __importDefault(require("cors"));
+var authRoutes = __importStar(require("../routes/auth_utils"));
+var userRoutes = __importStar(require("../routes/user_utils"));
+var verify_token_1 = require("../middlewares/verify_token");
+var expressLoader = function (app) {
+    app.use(body_parser_1.json());
+    app.use(cors_1.default());
+    app.post("/register", authRoutes.register);
+    app.post("/login", authRoutes.login);
+    app.post("/addUser", userRoutes.addUser);
+    app.get("/userRoutes", verify_token_1.verifyToken, userRoutes.myInfo);
+};
+exports.expressLoader = expressLoader;

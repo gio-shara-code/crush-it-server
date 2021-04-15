@@ -1,4 +1,17 @@
-GET http://localhost:3000/users HTTP/1.1
+GET http://localhost:3000/me HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdpb3JnaUBnbWFpbC5jb20iLCJuYW1lIjoiR2lvcmdpIFNoYXJhc2hlbmlkemUiLCJpZCI6MTYxODQxMDk4ODY0NiwiY3JlYXRlZE9uIjowLCJpYXQiOjE2MTg0MTA5ODh9.voUYNrVm7_3SgaskUlhEJNmJhrB2PajZg10LIBOaKaQ
+
+###
+
+POST http://localhost:3000/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "giorgi@gmail.com",
+    "password": "shara123",
+    "name": "Giorgi Sharashenidze"
+}
 
 ###
 
@@ -11,11 +24,4 @@ Content-Type: application/json
 }
 
 ###
-
-POST http://localhost:3000/register HTTP/1.1
-Content-Type: application/json
-
-{
-    "email": "giorgi@gmail.com",
-    "password": "shara123"
-}
+POST http://localhost:3000/add_user HTTP/1.1

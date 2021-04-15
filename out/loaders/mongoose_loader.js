@@ -1,23 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -58,25 +39,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var index_1 = __importDefault(require("./config/index"));
-var loaders = __importStar(require("./loaders/index_loader"));
-function startServer() {
-    return __awaiter(this, void 0, void 0, function () {
-        var app;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    app = express_1.default();
-                    return [4 /*yield*/, loaders.init(app)];
-                case 1:
-                    _a.sent();
-                    app.listen(index_1.default.port, function () {
-                        console.log("The server is running on the port " + index_1.default.port);
-                    });
-                    return [2 /*return*/];
-            }
-        });
+exports.mongooseLoader = void 0;
+var mongoose_1 = __importDefault(require("mongoose"));
+var index_1 = __importDefault(require("../config/index"));
+var mongooseLoader = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var connection, e_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, mongoose_1.default.connect("mongodb+srv://" + index_1.default.db.username + ":" + index_1.default.db.password + "@demo-cluster.ycsr4.mongodb.net/" + index_1.default.db.name + "?retryWrites=true&w=majority", index_1.default.db.options)];
+            case 1:
+                connection = _a.sent();
+                return [3 /*break*/, 3];
+            case 2:
+                e_1 = _a.sent();
+                console.log("mongoose error: " + e_1);
+                return [2 /*return*/, process.exit(1)];
+            case 3:
+                console.log("Mongodb connection established!");
+                return [2 /*return*/, connection];
+        }
     });
-}
-startServer();
+}); };
+exports.mongooseLoader = mongooseLoader;

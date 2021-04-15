@@ -1,23 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -58,25 +39,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var index_1 = __importDefault(require("./config/index"));
-var loaders = __importStar(require("./loaders/index_loader"));
-function startServer() {
-    return __awaiter(this, void 0, void 0, function () {
-        var app;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    app = express_1.default();
-                    return [4 /*yield*/, loaders.init(app)];
-                case 1:
-                    _a.sent();
-                    app.listen(index_1.default.port, function () {
-                        console.log("The server is running on the port " + index_1.default.port);
-                    });
-                    return [2 /*return*/];
-            }
-        });
+exports.verifyToken = void 0;
+var index_1 = __importDefault(require("../config/index"));
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var verifyToken = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var token, payload, _a;
+    var _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                token = (_b = req.header("authorization")) === null || _b === void 0 ? void 0 : _b.split(" ")[1];
+                if (!token)
+                    return [2 /*return*/, res.json({
+                            message: "token not found",
+                            success: false,
+                        })];
+                _c.label = 1;
+            case 1:
+                _c.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, jsonwebtoken_1.default.verify(token, index_1.default.jWTSecretKey)];
+            case 2:
+                payload = _c.sent();
+                req.body.userId = payload.id;
+                return [2 /*return*/, next(payload.id)];
+            case 3:
+                _a = _c.sent();
+                return [2 /*return*/, res.json({
+                        message: "Token is invalid.",
+                        success: false,
+                    })];
+            case 4: return [2 /*return*/];
+        }
     });
-}
-startServer();
+}); };
+exports.verifyToken = verifyToken;

@@ -1,23 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -58,25 +39,44 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var index_1 = __importDefault(require("./config/index"));
-var loaders = __importStar(require("./loaders/index_loader"));
-function startServer() {
-    return __awaiter(this, void 0, void 0, function () {
-        var app;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    app = express_1.default();
-                    return [4 /*yield*/, loaders.init(app)];
-                case 1:
-                    _a.sent();
-                    app.listen(index_1.default.port, function () {
-                        console.log("The server is running on the port " + index_1.default.port);
-                    });
-                    return [2 /*return*/];
-            }
+exports.UserService = void 0;
+var user_model_1 = __importDefault(require("../models/user_model"));
+var UserService = /** @class */ (function () {
+    function UserService() {
+    }
+    UserService.prototype.addUser = function (user) {
+        return __awaiter(this, void 0, void 0, function () {
+            var usr, doc, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        usr = new user_model_1.default(user);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, usr.save()];
+                    case 2:
+                        doc = _a.sent();
+                        return [2 /*return*/, doc];
+                    case 3:
+                        e_1 = _a.sent();
+                        console.log("UserService[addUser] failed: " + e_1);
+                        return [2 /*return*/];
+                    case 4: return [2 /*return*/];
+                }
+            });
         });
-    });
-}
-startServer();
+    };
+    UserService.prototype.getUser = function (id) {
+        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
+            return [2 /*return*/];
+        }); });
+    };
+    UserService.prototype.checkIfUserExists = function () {
+        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
+            return [2 /*return*/];
+        }); });
+    };
+    return UserService;
+}());
+exports.UserService = UserService;

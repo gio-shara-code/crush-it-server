@@ -26,5 +26,4 @@ var UserSchema = new mongoose_1.Schema({
     password: { type: String, required: true },
     createdOn: { type: Number, required: true },
 });
-var User = mongoose_1.default.model("User", UserSchema);
-exports.default = User;
+exports.default = mongoose_1.default.model("User", UserSchema);
