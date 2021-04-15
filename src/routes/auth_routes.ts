@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import config from "../config/index";
 import jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
+import { UserService } from "../services/user_services";
+
+const userService = new UserService();
 
 const register = async (req: Request, res: Response) => {
   //retieve email and password
@@ -25,12 +28,23 @@ const register = async (req: Request, res: Response) => {
     });
   }
 
-  //add user into database
-  //...
   //check if the email already exists
   //...
-  //add user in the database
-  //....
+
+  //add user into database
+  //...
+  const doc = await userService.addUser({
+    email: email,
+    password: hashedPassword,
+    createdOn: Date.now(),
+    name: name,
+  });
+  if (!doc) {
+    return res.json({
+      success: false,
+      message: "Internal server: Writing user info inton database failed",
+    });
+  }
 
   //signing token
   try {
@@ -86,4 +100,3 @@ const login = async (req: Request, res: Response) => {
 };
 
 export { register, login };
-
