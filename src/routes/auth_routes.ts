@@ -29,12 +29,12 @@ const register = async (req: Request, res: Response) => {
   }
 
   //check if the email already exists
-  const userExists = await userService.checkUserExistencyByEmail(email)
-  if(userExists) {
-    console.log()
-  }else {
-
-  }
+  const userExists = await userService.checkUserExistencyByEmail(email);
+  if (userExists)
+    return res.json({
+      success: false,
+      message: `User with the email ${email} exists alreaady`,
+    });
 
   //add user into database
   //...
@@ -47,15 +47,19 @@ const register = async (req: Request, res: Response) => {
   if (!doc) {
     return res.json({
       success: false,
-      message: "Internal server: Writing user info inton database failed",
+      message: "Internal server: Writing user info into database failed",
     });
   }
 
   //signing token
   try {
-    const token = await jwt.sign({ id: "user id" }, config.jWTSecretKey, {
-      algorithm: "HS256",
-    });
+    const token = await jwt.sign(
+      { id: doc._id, email: doc.email },
+      config.jWTSecretKey,
+      {
+        algorithm: "HS256",
+      }
+    );
     res.json({ success: true, token: token });
   } catch {
     res.json({
