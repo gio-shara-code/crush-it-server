@@ -29,7 +29,12 @@ const register = async (req: Request, res: Response) => {
   }
 
   //check if the email already exists
-  //...
+  const userExists = await userService.checkUserExistencyByEmail(email)
+  if(userExists) {
+    console.log()
+  }else {
+
+  }
 
   //add user into database
   //...

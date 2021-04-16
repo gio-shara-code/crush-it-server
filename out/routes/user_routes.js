@@ -1,23 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -54,27 +35,63 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.expressLoader = void 0;
-var body_parser_1 = require("body-parser");
-var cors_1 = __importDefault(require("cors"));
-var authRoute = __importStar(require("../routes/auth_routes"));
-var userRoute = __importStar(require("../routes/user_routes"));
-var verify_token_1 = require("../middlewares/verify_token");
+exports.addUser = exports.getUserById = void 0;
 var user_services_1 = require("../services/user_services");
 var userService = new user_services_1.UserService();
-var expressLoader = function (app) { return __awaiter(void 0, void 0, void 0, function () {
+/**
+ * Think of the design your api.
+ * Look at the frontend and think on how to design your api.
+ *
+ */
+var getUserById = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var userDoc;
     return __generator(this, function (_a) {
-        app.use(body_parser_1.json());
-        app.use(cors_1.default());
-        app.post("/register", authRoute.register);
-        app.post("/login", authRoute.login);
-        app.post("/add_user", verify_token_1.verifyToken, userRoute.addUser);
-        app.get("/get_user_by_id", verify_token_1.verifyToken, userRoute.getUserById);
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, userService.getUserById(req.body.email)];
+            case 1:
+                userDoc = _a.sent();
+                if (!userDoc) {
+                    return [2 /*return*/, res.json({
+                            success: false,
+                            message: "User doesn't exists",
+                        })];
+                }
+                res.json({
+                    success: true,
+                    user: userDoc,
+                });
+                return [2 /*return*/];
+        }
     });
 }); };
-exports.expressLoader = expressLoader;
+exports.getUserById = getUserById;
+var addUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var doc;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, userService.addUser({
+                    email: "gio@demo.com",
+                    createdOn: Date.now(),
+                    password: "gio123",
+                    name: "Giorgi Sharashenidze",
+                })];
+            case 1:
+                doc = _a.sent();
+                if (!doc) {
+                    res.json({
+                        success: false,
+                        message: "We coulnd't add the user",
+                    });
+                }
+                else {
+                    res.json({
+                        success: true,
+                        doc: doc,
+                    });
+                }
+                return [2 /*return*/];
+        }
+    });
+}); };
+exports.addUser = addUser;

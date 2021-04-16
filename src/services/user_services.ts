@@ -1,4 +1,5 @@
 import UserModel, { UserInterface } from "../models/user_model";
+import { Types } from "mongoose";
 
 class UserService {
   async addUser(user: UserInterface) {
@@ -12,20 +13,31 @@ class UserService {
     }
   }
 
-  async getUserById(id: string): Promise<boolean> {
+  async getUserById(id: string) {
     try {
-      const docs = await UserModel.find({ _id: "60781df3d25abbb59da9d51d" });
-      if (docs.length !== 0) return true;
+      const docs = await UserModel.find({
+        _id: new Types.ObjectId(id),
+      });
+      if (docs.length === 0) return;
       console.log(docs);
+      return docs[0];
     } catch (e) {
       console.log(`UserService[getUserById] failed: ${e}`);
-      return false;
+      return;
+    }
+  }
+
+  async checkUserExistencyByEmail(email: string): Promise<boolean> {
+    try {
+      const docs = await UserModel.find({ email: email });
+      if (docs.length !== 0) return true;
+    } catch (e) {
+      console.log(`UserService[checkUserExistency] failed: ${e}`);
+      return true;
     }
 
     return false;
   }
-
-  async checkIfUserExists() {}
 }
 
 export { UserService };

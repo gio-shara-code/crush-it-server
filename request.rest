@@ -25,3 +25,7 @@ Content-Type: application/json
 
 ###
 POST http://localhost:3000/add_user HTTP/1.1
+
+
+###
+GET http://localhost:3000/get_user_by_id HTTP/1.1
