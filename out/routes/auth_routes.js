@@ -65,7 +65,7 @@ var bcrypt = __importStar(require("bcrypt"));
 var user_services_1 = require("../services/user_services");
 var userService = new user_services_1.UserService();
 var register = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, email, password, name, hashedPassword, _b, doc, token, _c;
+    var _a, email, password, name, hashedPassword, _b, userExists, doc, token, _c;
     return __generator(this, function (_d) {
         switch (_d.label) {
             case 0:
@@ -90,38 +90,46 @@ var register = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                         success: false,
                         message: "Internal server error: hashing password failed",
                     })];
-            case 4: return [4 /*yield*/, userService.addUser({
-                    email: email,
-                    password: hashedPassword,
-                    createdOn: Date.now(),
-                    name: name,
-                })];
+            case 4: return [4 /*yield*/, userService.checkUserExistencyByEmail(email)];
             case 5:
+                userExists = _d.sent();
+                if (userExists)
+                    return [2 /*return*/, res.json({
+                            success: false,
+                            message: "User with the email " + email + " exists alreaady",
+                        })];
+                return [4 /*yield*/, userService.addUser({
+                        email: email,
+                        password: hashedPassword,
+                        createdOn: Date.now(),
+                        name: name,
+                    })];
+            case 6:
                 doc = _d.sent();
                 if (!doc) {
                     return [2 /*return*/, res.json({
                             success: false,
-                            message: "Internal server: Writing user info inton database failed",
+                            message: "Internal server: Writing user info into database failed",
                         })];
                 }
-                _d.label = 6;
-            case 6:
-                _d.trys.push([6, 8, , 9]);
-                return [4 /*yield*/, jsonwebtoken_1.default.sign({ id: "user id" }, index_1.default.jWTSecretKey, {
+                _d.label = 7;
+            case 7:
+                _d.trys.push([7, 9, , 10]);
+                return [4 /*yield*/, jsonwebtoken_1.default.sign({ id: doc._id, email: doc.email }, index_1.default.jWTSecretKey, {
                         algorithm: "HS256",
                     })];
-            case 7:
+            case 8:
                 token = _d.sent();
                 res.json({ success: true, token: token });
-                return [3 /*break*/, 9];
-            case 8:
+                return [3 /*break*/, 10];
+            case 9:
                 _c = _d.sent();
                 res.json({
                     message: "Internal server: signing jwt failed!",
                     success: false,
                 });
-                return [3 /*break*/, 9];
-            case 9: return [2 /*return*/];
+                return [3 /*break*/, 10];
+            case 10: return [2 /*return*/];
         }
     });
 }); };

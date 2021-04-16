@@ -93,7 +93,7 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.prototype.checkUserExistency = function (email) {
+    UserService.prototype.checkUserExistencyByEmail = function (email) {
         return __awaiter(this, void 0, void 0, function () {
             var docs, e_3;
             return __generator(this, function (_a) {
