@@ -19,7 +19,19 @@ class UserService {
         _id: new Types.ObjectId(id),
       });
       if (docs.length === 0) return;
-      console.log(docs);
+      return docs[0];
+    } catch (e) {
+      console.log(`UserService[getUserById] failed: ${e}`);
+      return;
+    }
+  }
+
+  async getUserByEmail(email: string) {
+    try {
+      const docs = await UserModel.find({
+        email: email,
+      });
+      if (docs.length === 0) return;
       return docs[0];
     } catch (e) {
       console.log(`UserService[getUserById] failed: ${e}`);

@@ -135,7 +135,7 @@ var register = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
 }); };
 exports.register = register;
 var login = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, email, password, success, _b, token, _c;
+    var _a, email, password, doc, success, _b, token, _c;
     return __generator(this, function (_d) {
         switch (_d.label) {
             case 0:
@@ -146,42 +146,51 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
                             message: "Email or/and password is missing!",
                         })];
                 }
-                _d.label = 1;
+                return [4 /*yield*/, userService.getUserByEmail(email)];
             case 1:
-                _d.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, bcrypt.compare(password, "user password")];
+                doc = _d.sent();
+                if (!doc) {
+                    return [2 /*return*/, res.json({
+                            success: false,
+                            message: "Your email " + email + " doesn't exist",
+                        })];
+                }
+                _d.label = 2;
             case 2:
+                _d.trys.push([2, 4, , 5]);
+                return [4 /*yield*/, bcrypt.compare(password, doc.password)];
+            case 3:
                 success = _d.sent();
                 if (!success)
                     return [2 /*return*/, res.json({
                             success: false,
                             message: "Password is wrong!",
                         })];
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 5];
+            case 4:
                 _b = _d.sent();
                 res.json({
                     success: false,
                     message: "Internal server: comparing password doesn't work.",
                 });
-                return [3 /*break*/, 4];
-            case 4:
-                _d.trys.push([4, 6, , 7]);
-                return [4 /*yield*/, jsonwebtoken_1.default.sign({ id: "user id" }, index_1.default.jWTSecretKey, {
+                return [3 /*break*/, 5];
+            case 5:
+                _d.trys.push([5, 7, , 8]);
+                return [4 /*yield*/, jsonwebtoken_1.default.sign({ id: doc._id, email: doc.email }, index_1.default.jWTSecretKey, {
                         algorithm: "HS256",
                     })];
-            case 5:
+            case 6:
                 token = _d.sent();
                 res.json({ success: true, token: token });
-                return [3 /*break*/, 7];
-            case 6:
+                return [3 /*break*/, 8];
+            case 7:
                 _c = _d.sent();
                 res.json({
                     message: "We couldn't generate a token for you!",
                     success: false,
                 });
-                return [3 /*break*/, 7];
-            case 7: return [2 /*return*/];
+                return [3 /*break*/, 8];
+            case 8: return [2 /*return*/];
         }
     });
 }); };

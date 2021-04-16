@@ -77,11 +77,18 @@ const login = async (req: Request, res: Response) => {
       message: "Email or/and password is missing!",
     });
   }
-  //Check if the email exists in the database
-  //...
+  //get user from database
+  const doc = await userService.getUserByEmail(email);
+  if (!doc) {
+    return res.json({
+      success: false,
+      message: `Your email ${email} doesn't exist`,
+    });
+  }
+
   //Check if the password is correct
   try {
-    const success = await bcrypt.compare(password, "user password");
+    const success = await bcrypt.compare(password, doc.password);
     if (!success)
       return res.json({
         success: false,
@@ -96,7 +103,7 @@ const login = async (req: Request, res: Response) => {
 
   //generate token using jwt
   try {
-    const token = await jwt.sign({ id: "user id" }, config.jWTSecretKey, {
+    const token = await jwt.sign({ id: doc._id, email: doc.email }, config.jWTSecretKey, {
       algorithm: "HS256",
     });
     res.json({ success: true, token: token });
