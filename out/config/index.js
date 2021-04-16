@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv_1 = __importDefault(require("dotenv"));
 // config() will read your .env file, parse the contents, assign it to process.env.
 dotenv_1.default.config();
-if (!process.env.SECRET_KEY) {
-    console.log("SECRET_KEY is undefined in .env file");
+if (!process.env.JWT_SECRET_KEY) {
+    console.log("JWT_SECRET_KEY is undefined in .env file");
     process.exit();
 }
 exports.default = {
-    jWTSecretKey: process.env.SECRET_KEY,
+    jWTSecretKey: process.env.JWT_SECRET_KEY,
     port: process.env.PORT || 300,
     db: {
         username: "gio_shara123",
