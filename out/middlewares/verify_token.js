@@ -61,7 +61,8 @@ var verifyToken = function (req, res, next) { return __awaiter(void 0, void 0, v
             case 2:
                 payload = _c.sent();
                 req.body.userId = payload.id;
-                return [2 /*return*/, next(payload.id)];
+                next();
+                return [3 /*break*/, 4];
             case 3:
                 _a = _c.sent();
                 return [2 /*return*/, res.json({

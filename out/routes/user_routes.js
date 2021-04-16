@@ -36,36 +36,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addUser = exports.getUserById = void 0;
+exports.addUser = exports.userInfo = void 0;
 var user_services_1 = require("../services/user_services");
 var userService = new user_services_1.UserService();
 /**
  * Think of the design your api.
  * Look at the frontend and think on how to design your api.
- *
  */
-var getUserById = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var userDoc;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, userService.getUserById(req.body.email)];
-            case 1:
-                userDoc = _a.sent();
-                if (!userDoc) {
-                    return [2 /*return*/, res.json({
-                            success: false,
-                            message: "User doesn't exists",
-                        })];
-                }
-                res.json({
-                    success: true,
-                    user: userDoc,
-                });
-                return [2 /*return*/];
-        }
-    });
-}); };
-exports.getUserById = getUserById;
 var addUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var doc;
     return __generator(this, function (_a) {
@@ -81,7 +58,7 @@ var addUser = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
                 if (!doc) {
                     res.json({
                         success: false,
-                        message: "We coulnd't add the user",
+                        message: "We couldn't add the user",
                     });
                 }
                 else {
@@ -95,3 +72,13 @@ var addUser = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
     });
 }); };
 exports.addUser = addUser;
+var userInfo = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        res.json({
+            success: true,
+            id: req.body.userId,
+        });
+        return [2 /*return*/];
+    });
+}); };
+exports.userInfo = userInfo;

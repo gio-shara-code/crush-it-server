@@ -64,8 +64,7 @@ var cors_1 = __importDefault(require("cors"));
 var authRoute = __importStar(require("../routes/auth_routes"));
 var userRoute = __importStar(require("../routes/user_routes"));
 var verify_token_1 = require("../middlewares/verify_token");
-var user_services_1 = require("../services/user_services");
-var userService = new user_services_1.UserService();
+// const userService = new UserService();
 var expressLoader = function (app) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         app.use(body_parser_1.json());
@@ -73,7 +72,7 @@ var expressLoader = function (app) { return __awaiter(void 0, void 0, void 0, fu
         app.post("/register", authRoute.register);
         app.post("/login", authRoute.login);
         app.post("/add_user", verify_token_1.verifyToken, userRoute.addUser);
-        app.get("/get_user_by_id", verify_token_1.verifyToken, userRoute.getUserById);
+        app.get("/user_info", verify_token_1.verifyToken, userRoute.userInfo);
         return [2 /*return*/];
     });
 }); };

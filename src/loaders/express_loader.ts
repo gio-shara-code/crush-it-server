@@ -6,7 +6,7 @@ import * as userRoute from "../routes/user_routes";
 import { verifyToken } from "../middlewares/verify_token";
 import { UserService } from "../services/user_services";
 
-const userService = new UserService();
+// const userService = new UserService();
 const expressLoader = async (app: Application) => {
   app.use(json());
   app.use(cors());
@@ -14,7 +14,7 @@ const expressLoader = async (app: Application) => {
   app.post("/register", authRoute.register);
   app.post("/login", authRoute.login);
   app.post("/add_user", verifyToken, userRoute.addUser);
-  app.get("/get_user_by_id", verifyToken, userRoute.getUserById);
+  app.get("/user_info", verifyToken, userRoute.userInfo);
 };
 
 export { expressLoader };

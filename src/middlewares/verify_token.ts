@@ -14,7 +14,7 @@ const verifyToken = async (req: Request, res: Response, next: any) => {
   try {
     const payload: any = await jwt.verify(token, config.jWTSecretKey);
     req.body.userId = payload.id;
-    return next(payload.id);
+    next();
   } catch {
     return res.json({
       message: "Token is invalid.",

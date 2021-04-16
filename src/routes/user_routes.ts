@@ -3,28 +3,10 @@ import { UserService } from "../services/user_services";
 
 const userService = new UserService();
 
-
 /**
  * Think of the design your api.
  * Look at the frontend and think on how to design your api.
- *
  */
-
-const getUserById = async (req: Request, res: Response) => {
-  const userDoc = await userService.getUserById(req.body.email);
-
-  if (!userDoc) {
-    return res.json({
-      success: false,
-      message: "User doesn't exists",
-    });
-  }
-
-  res.json({
-    success: true,
-    user: userDoc,
-  });
-};
 
 const addUser = async (req: Request, res: Response) => {
   const doc = await userService.addUser({
@@ -36,7 +18,7 @@ const addUser = async (req: Request, res: Response) => {
   if (!doc) {
     res.json({
       success: false,
-      message: "We coulnd't add the user",
+      message: "We couldn't add the user",
     });
   } else {
     res.json({
@@ -46,4 +28,11 @@ const addUser = async (req: Request, res: Response) => {
   }
 };
 
-export { getUserById, addUser };
+const userInfo = async (req: Request, res: Response) => {
+  res.json({
+    success: true,
+    id: req.body.userId,
+  });
+};
+
+export { userInfo, addUser };
