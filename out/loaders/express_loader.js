@@ -71,8 +71,8 @@ var expressLoader = function (app) { return __awaiter(void 0, void 0, void 0, fu
         app.use(cors_1.default());
         app.post("/register", authRoute.register);
         app.post("/login", authRoute.login);
-        app.post("/add_user", verify_token_1.verifyToken, userRoute.addUser);
-        app.get("/user_info", verify_token_1.verifyToken, userRoute.userInfo);
+        app.post("/user", verify_token_1.verifyToken, userRoute.addUser);
+        app.get("/user/:id", verify_token_1.verifyToken, userRoute.userInfo); //get user with a certain id
         return [2 /*return*/];
     });
 }); };

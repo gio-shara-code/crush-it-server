@@ -13,8 +13,12 @@ const expressLoader = async (app: Application) => {
 
   app.post("/register", authRoute.register);
   app.post("/login", authRoute.login);
-  app.post("/add_user", verifyToken, userRoute.addUser);
-  app.get("/user_info", verifyToken, userRoute.userInfo);
+  app.post("/user", verifyToken, userRoute.addUser);
+  app.get("/user/:id", verifyToken, userRoute.userInfo); //get user with a certain id
+  //app.get(/users) //for retrieving the users
+  //app.post(/users or /user) //for retrieving the users
+  //app.post(/user-edit-id) //for retrieving the users
+
 };
 
 export { expressLoader };
