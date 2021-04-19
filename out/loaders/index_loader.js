@@ -36,10 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.init = void 0;
+exports.initLoaders = void 0;
 var express_loader_1 = require("./express_loader");
 var mongoose_loader_1 = require("./mongoose_loader");
-var init = function (expressApp) { return __awaiter(void 0, void 0, void 0, function () {
+var initLoaders = function (expressApp) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, mongoose_loader_1.mongooseLoader()];
@@ -53,4 +53,4 @@ var init = function (expressApp) { return __awaiter(void 0, void 0, void 0, func
         }
     });
 }); };
-exports.init = init;
+exports.initLoaders = initLoaders;

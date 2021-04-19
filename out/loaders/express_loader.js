@@ -68,11 +68,12 @@ var verify_token_1 = require("../middlewares/verify_token");
 var expressLoader = function (app) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         app.use(body_parser_1.json());
+        app.use(body_parser_1.urlencoded({ extended: false }));
         app.use(cors_1.default());
         app.post("/register", authRoute.register);
         app.post("/login", authRoute.login);
         app.post("/user", verify_token_1.verifyToken, userRoute.addUser);
-        app.get("/user/:id", verify_token_1.verifyToken, userRoute.userInfo); //get user with a certain id
+        app.get("/user/:id", verify_token_1.verifyToken, userRoute.getUserById); //get user with a certain id
         return [2 /*return*/];
     });
 }); };

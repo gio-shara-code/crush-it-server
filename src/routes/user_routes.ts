@@ -28,11 +28,15 @@ const addUser = async (req: Request, res: Response) => {
   }
 };
 
-const userInfo = async (req: Request, res: Response) => {
+const getUserById = async (req: Request, res: Response) => {
+  const query = req.params;
+
+  console.log(query);
   res.json({
     success: true,
     id: req.body.userId,
   });
 };
 
-export { userInfo, addUser };
+
+export { getUserById, addUser };

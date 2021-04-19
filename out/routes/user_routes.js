@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addUser = exports.userInfo = void 0;
+exports.addUser = exports.getUserById = void 0;
 var user_services_1 = require("../services/user_services");
 var userService = new user_services_1.UserService();
 /**
@@ -72,8 +72,11 @@ var addUser = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
     });
 }); };
 exports.addUser = addUser;
-var userInfo = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var getUserById = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var query;
     return __generator(this, function (_a) {
+        query = req.params;
+        console.log(query);
         res.json({
             success: true,
             id: req.body.userId,
@@ -81,4 +84,4 @@ var userInfo = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
         return [2 /*return*/];
     });
 }); };
-exports.userInfo = userInfo;
+exports.getUserById = getUserById;

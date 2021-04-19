@@ -21,3 +21,8 @@ Content-Type: application/json
     "email": "giorgi@gmail.com",
     "password": "shara123"
 }
+
+###
+
+GET http://localhost:3000/user/123 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzkzYjNlM2Q4MzQ5ZDY0MWVlYmU4YSIsImVtYWlsIjoiZ2lvcmdpQGdtYWlsLmNvbSIsImlhdCI6MTYxODU1ODYxMn0.vtnEcROyHSHqpHEmRTkcpPzTTkFuo1EAP9UdKK4mO_U
