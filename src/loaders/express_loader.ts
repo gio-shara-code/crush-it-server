@@ -4,7 +4,6 @@ import cors from "cors";
 import * as authRoute from "../routes/auth_routes";
 import * as userRoute from "../routes/user_routes";
 import { verifyToken } from "../middlewares/verify_token";
-import { UserService } from "../services/user_services";
 
 // const userService = new UserService();
 const expressLoader = async (app: Application) => {
