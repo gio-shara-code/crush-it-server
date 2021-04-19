@@ -3,7 +3,7 @@
     "module": "CommonJs",
     "target": "ES5",
     "esModuleInterop": true,
-    "outDir": "out",
+    "outDir": "dist",
     "strict": true
   },
   "include": ["src/**/*"],

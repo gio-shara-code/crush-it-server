@@ -1,10 +1,15 @@
 {
   "name": "crush-it",
   "main": "out/server.js",
+  "engines": {
+    "node": "14.15.3"
+  },
   "scripts": {
-    "dev": "nodemon [main]",
-    "start": "node out/server.js",
-    "build": "tsc --watch"
+    "start": "node dist/server.js",
+    "postinstall": "tsc",
+    "watch-node": "nodemon dist/server.js",
+    "watch-ts": "tsc -w",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
