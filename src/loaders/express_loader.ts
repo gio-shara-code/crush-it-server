@@ -19,6 +19,7 @@ const expressLoader = async (app: Application) => {
   //app.get(/users) //for retrieving the users
   //app.post(/users or /user) //for retrieving the users
   //app.post(/user-edit-id) //for retrieving the users
- };
+  //New commit
+};
 
 export { expressLoader };
