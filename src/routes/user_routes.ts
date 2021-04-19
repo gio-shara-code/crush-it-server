@@ -38,5 +38,4 @@ const getUserById = async (req: Request, res: Response) => {
   });
 };
 
-
 export { getUserById, addUser };
