@@ -11,6 +11,7 @@ const expressLoader = async (app: Application) => {
   app.use(urlencoded({ extended: false }));
   app.use(cors());
 
+  
   app.post("/register", authRoute.register);
   app.post("/login", authRoute.login);
   app.post("/user", verifyToken, userRoute.addUser);
