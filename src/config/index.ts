@@ -11,7 +11,7 @@ export default {
   port: process.env.PORT || 300,
   db: {
     username: "gio_shara123",
-    password: "shara123",
+    password: "Qrx97JvqgGHLvtH9",
     name: "demo-database",
     options: {
       useNewUrlParser: true,
