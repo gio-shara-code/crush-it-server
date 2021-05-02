@@ -91,10 +91,13 @@ So I came up with 3 different schema's for this use case:
 
 
 ### 1st Option
+![Algorithm schema](./images/schema_01.png)
 
+### 2nd Option
+![Algorithm schema](./images/schema_02.png)
 
-![DB Design](./images/db_design.png)
-
+### 3rd Option
+![Algorithm schema](./images/schema_03.png)
 
 
 ## App Screenshots
