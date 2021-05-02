@@ -8,6 +8,7 @@ This is a repo for crush-it which contains **server-side code**. The front-end c
 * [Setup](#setup)
 * [Features](#features)
 * [DB Design](#db-design)
+* [App Screenshots](#app-screenshot)
 
 
 ## Project Description
@@ -86,4 +87,6 @@ This command starts the nodejs server.
 * exercises
 * circuits
 
-## Screenshots
+## App Screenshots
+![Home Page](./images/home_page.png) ![Workout Builder](./images/workout_builder.png)
+
