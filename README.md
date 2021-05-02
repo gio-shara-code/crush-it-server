@@ -114,7 +114,7 @@ Basically when I started to think about modeling the schema of database :
 ### Filter Exercise
 ![Filter Exercise](./images/filter_exercise.png)
 
-### [Run Workout Repetition
+### Run Workout Repetition
 ![Run Workout Rep](./images/run_workout_rep.png)
 
 ### Run Workout Time
