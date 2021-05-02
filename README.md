@@ -125,7 +125,7 @@ This option seems to have just one query operations since we are storing part of
 But there is one disadvantage for this solution: There is no way of accessing exercises details as stand-alone entities. That means, in order to change the exercise details or update them we have to change the whole list. But, still if we compare this option with the other two options, this solution is the best for the efficiency.
 
 ### End Result
-![Algorithm schema](./images/db_design.png.png)
+![DB Design](./images/db_design.png)
 
 ## App Screenshots
 
