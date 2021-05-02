@@ -92,5 +92,33 @@ Basically when I started to think about modeling the schema of database :
 
 
 ## App Screenshots
-werawre![Home Page](./images/home_page.png) ![Workout Builder](./images/workout_builder.png) ![Edit Workout](./images/edit_workout_name_desc.png)
-![Edit Exercise](./images/edit_exercise.png) ![Add Exercise](./images/add_exercise.png) ![Add Custom Exercise](./images/add_custom_exercise.png) ![Filter Exercise](./images/filter_exercise.png) ![Run Workout Rep](./images/run_workout_rep.png) ![Run Workout Time](./images/run_workout_time.png) ![Run Workout Routine](./images/run_workout_routine.png)
+
+### Home Page
+![Home Page](./images/home_page.png) 
+
+### Workout Builder
+![Workout Builder](./images/workout_builder.png) 
+
+### Edit Workout Dialog
+![Edit Workout](./images/edit_workout_name_desc.png)
+
+### Edit Exercise Dialog
+![Edit Exercise](./images/edit_exercise.png)
+
+### Add Exercise Dialog
+![Add Exercise](./images/add_exercise.png)
+
+### Add Custom Exercise Dialog
+![Add Custom Exercise](./images/add_custom_exercise.png)
+
+### Filter Exercise
+![Filter Exercise](./images/filter_exercise.png)
+
+### [Run Workout Repetition
+![Run Workout Rep](./images/run_workout_rep.png)
+
+### Run Workout Time
+![Run Workout Time](./images/run_workout_time.png)
+
+### Run Workout Routine
+![Run Workout Routine](./images/run_workout_routine.png)
