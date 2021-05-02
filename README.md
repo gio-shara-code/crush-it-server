@@ -39,10 +39,10 @@ You can check out other dependencies in **package.json** file under the property
 
 Type this in terminal:
 Unix
-> ls
+`ls`
 
 windows
-> dir
+`dir`
 
 If you are in the right directory, you will see these files:
 
@@ -63,7 +63,7 @@ After executing this command, the following folder will be created: **node_modul
 
 ### 3. Start the server
 
-> npm start
+`npm start`
 
 This command starts the nodejs server.
 
