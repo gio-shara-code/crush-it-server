@@ -85,13 +85,27 @@ This command starts the nodejs server.
 * exercises
 * circuits
 
-Basically when I started to think about modeling the schema of database I noticed that I had to wisely decide on how to structure the database so that the there won't be any efficiency problems. The **Workout Builder** page seems to be the complex one because its contains **circuits** and **exercises**.
+Basically when I started to think about modeling the schema of database I noticed that I had to wisely decide on how to structure the database so that it won't be any efficiency problems. The **Workout Builder** page seems to be the complex one because its contains **circuits** and **exercises**.
 
 So I came up with 3 different schema's for this use case:
 
-
 ### 1st Option
 ![Algorithm schema](./images/schema_01.png)
+
+With this options I had to query circuits...
+
+`circuit=db.users.circuits.find({}).toArray()`
+
+And then query for each circuit their corresponding exercises from the list
+
+`exercises=db.users.circuits.find({ _id: { $in : circuit.exercises } } ).toArray()`
+
+That means:
+- 1 circuit requires 2 queries
+- 2 circuits requires 3 queries
+- 3 cir. -> 4 queries etc.
+
+This is probably not the best solution since we are querying a lot.
 
 ### 2nd Option
 ![Algorithm schema](./images/schema_02.png)
@@ -99,14 +113,13 @@ So I came up with 3 different schema's for this use case:
 ### 3rd Option
 ![Algorithm schema](./images/schema_03.png)
 
-
 ## App Screenshots
 
 ### Home Page
 ![Home Page](./images/home_page.png) 
 
 ### Workout Builder
-![Workout Builder](./images/workout_builder.png) 
+![Workout Builder](./images/workout_builder.png)
 
 ### Edit Workout Dialog
 ![Edit Workout](./images/edit_workout_name_desc.png)
