@@ -19,8 +19,9 @@ This is not a real-world project but the purpose of the project is to gain more 
 
 - Typescript ^4.2.3
 - React ^17.0.1
-- Nodejs ^14.15.3
-- Mongoose ^5.12.3
+- Node.js ^14.15.3
+- mongodb ^3.6.5
+- mongoose ^5.12.3
 
 You can check out other dependencies in **package.json** file under the property **dependencies** and **devDependencies**.
 
@@ -36,6 +37,7 @@ You can check out other dependencies in **package.json** file under the property
 
 1. Make sure you are in the root directory of the project.
 
+Type this in terminal:
 Unix
 > ls
 
@@ -44,6 +46,24 @@ windows
 
 If you are in the right directory, you will see these files:
 
-LICENSE                 README.md               node_modules            package.json            src
-Procfile                dist                    package-lock.json       request.rest            tsconfig.json
+- LICENSE
+- README.md
+- package.json
+- Procfile
+- dist
+- package-lock.json       
+- request.rest            
+- tsconfig.json
+
+2. Install dependencies
+
+> npm install
+
+After executing this command you will see this folder: **node_modules**. In this file there are bunch of dependencies for starting your server.
+
+3. Start the server
+
+> npm start
+
+This command starts the nodejs server.
 
