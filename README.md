@@ -8,7 +8,7 @@ This is a repo for crush-it which contains **server-side code**. The front-end c
 * [Setup](#setup)
 * [Features](#features)
 * [DB Design](#db-design)
-* [App Screenshots](#app-screenshot)
+* [App Screenshots](#app-screenshots)
 
 
 ## Project Description
