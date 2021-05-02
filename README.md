@@ -5,6 +5,7 @@ This is a repo for crush-it which contains **server-side code**. The front-end c
 ## Table of contents
 * [Project Description](#project-description)
 * [Technologies](#technologies)
+* [Setup](#setup)
 
 
 ## Project Description
@@ -29,7 +30,20 @@ You can check out other dependencies in **package.json** file under the property
 
 - **Why MongoDB?** Particularly I want to get familiar with NoSQL database because I am planning to work in large projects in the future. I read that MongoDB is popular and therefore I thought it is a good fit for our project. But of course I am aware of the advantages and disadvantages of both SQL and NoSQL databases. It's just because I had to choose between one of the databases so I went for NoSQL.
 
-- **Why Typescript?** We using typescript to avoid searching bugs in javascript. Because its types the developement is going much faster in comparison to javascript.
+- **Why Typescript?** We using typescript to avoid searching bugs in javascript. Because its types the development is going much faster in comparison to javascript.
 
+## Setup
 
+1. Make sure you are in the root directory of the project.
+
+Unix
+> ls
+
+windows
+> dir
+
+If you are in the right directory, you will see these files:
+
+LICENSE                 README.md               node_modules            package.json            src
+Procfile                dist                    package-lock.json       request.rest            tsconfig.json
 
