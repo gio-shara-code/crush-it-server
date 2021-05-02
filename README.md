@@ -85,7 +85,13 @@ This command starts the nodejs server.
 * exercises
 * circuits
 
-Basically when I started to think about modeling the schema of database :
+Basically when I started to think about modeling the schema of database I noticed that I had to wisely decide on how to structure the database so that the there won't be any efficiency problems. The **Workout Builder** page seems to be the complex one because its contains **circuits** and **exercises**.
+
+So I came up with 3 different schema's for this use case:
+
+
+### 1st Option
+
 
 ![DB Design](./images/db_design.png)
 
