@@ -72,4 +72,5 @@ After executing this command, the following folder will be created: **node_modul
 This command starts the nodejs server.
 
 ## Features
-Hello World
+
+![Algorithm schema](./images/user_story.jpeg)
