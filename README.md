@@ -73,4 +73,4 @@ This command starts the nodejs server.
 
 ## Features
 
-![Algorithm schema](./images/user_story.jpeg)
+![Algorithm schema](./images/user_story.jpg)
