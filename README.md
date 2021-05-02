@@ -55,13 +55,13 @@ If you are in the right directory, you will see these files:
 - request.rest            
 - tsconfig.json
 
-2. Install dependencies
+### 2. Install dependencies
 
 > npm install
 
 After executing this command you will see this folder: **node_modules**. In this file there are bunch of dependencies for starting your server.
 
-3. Start the server
+### 3. Start the server
 
 > npm start
 
