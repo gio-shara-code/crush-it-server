@@ -35,7 +35,7 @@ You can check out other dependencies in **package.json** file under the property
 
 ## Setup
 
-1. Make sure you are in the root directory of the project.
+### 1. Make sure you are in the root directory of the project.
 
 Type this in terminal:
 Unix
