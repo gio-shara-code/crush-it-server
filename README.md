@@ -57,7 +57,7 @@ If you are in the right directory, you will see these files:
 
 ### 2. Install dependencies
 
-> npm install
+`npm install`
 
 After executing this command, the following folder will be created: **node_modules**. This folder contains bunch of dependencies for starting your server.
 
