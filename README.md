@@ -38,10 +38,13 @@ You can check out other dependencies in **package.json** file under the property
 ### 1. Make sure you are in the root directory of the project.
 
 Type this in terminal:
+
 Unix
+
 `ls`
 
 windows
+
 `dir`
 
 If you are in the right directory, you will see these files:
