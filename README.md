@@ -6,6 +6,7 @@ This is a repo for crush-it which contains **server-side code**. The front-end c
 * [Project Description](#project-description)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [Features](#features)
 
 
 ## Project Description
@@ -41,11 +42,11 @@ Type this in terminal:
 
 Unix
 
-`ls`
+`username@MacBook-Pro-67 ~ % ls`
 
 windows
 
-`dir`
+`C:\Projects\...: dir`
 
 If you are in the right directory, you will see these files:
 
@@ -70,3 +71,5 @@ After executing this command, the following folder will be created: **node_modul
 
 This command starts the nodejs server.
 
+## Features
+Hello World
