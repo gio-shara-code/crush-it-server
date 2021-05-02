@@ -105,13 +105,24 @@ That means:
 - 2 circuits requires 3 queries
 - 3 cir. -> 4 queries etc.
 
-This is probably not the best solution since we are querying a lot.
+This is probably not the best solution since we are querying a lot and therefore it's unefficient, although we would have exercise info's as stand-alone document so it's would be easier to search and update independently. 
 
 ### 2nd Option
 ![Algorithm schema](./images/schema_02.png)
 
+This options is also unefficient because we have to query a lot in order to get **exercises** for corresponding circuits.
+
+- 1 circuit -> 2 qeuries
+- 2 circuit -> 3 qeuries 
+- 3 circuit -> 4 qeuries
+
+
 ### 3rd Option
 ![Algorithm schema](./images/schema_03.png)
+
+This option seems to have just one query operations since we are storing part of the exercise data in the circuit document. Since mongodb's document storage limit is 16MB, it's compatible to store exercises in the circuit document since the user would store at most 10 exercises inside.
+
+But there is one disadvantage for this solution: There is no way of accessing exercises details as stand-alone entities. That means, in order to change the exercise details or update them we have to change the whole list. But, still if we compare this option with the other two options, this solution is the best for the efficiency. 
 
 ## App Screenshots
 
