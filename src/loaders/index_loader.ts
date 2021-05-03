@@ -6,8 +6,8 @@ const initLoaders = async (expressApp: Application): Promise<Application> => {
   await mongooseLoader();
   expressLoader(expressApp);
   // ... more loaders can be here
-  // ... Initialize agenda
-  // ... or Redis, or whatever you want
+  // ... Initialize agenda (Scheduling tasks. Doing cron job)
+  // ... or Redis, or whatever you want (Database cache used for fast queries.)
   return expressApp;
 };
 

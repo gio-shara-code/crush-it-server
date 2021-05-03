@@ -1,15 +1,8 @@
 import { Request, Response } from "express";
-import { UserService } from "../services/user_services";
-
-const userService = new UserService();
-
-/**
- * Think of the design your api.
- * Look at the frontend and think on how to design your api.
- */
+import { addUser as addUserToDB } from "../services/user_services";
 
 const addUser = async (req: Request, res: Response) => {
-  const doc = await userService.addUser({
+  const doc = await addUserToDB({
     email: "gio@demo.com",
     createdOn: Date.now(),
     password: "gio123",

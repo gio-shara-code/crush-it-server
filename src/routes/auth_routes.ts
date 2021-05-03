@@ -2,9 +2,8 @@ import { Request, Response } from "express";
 import config from "../config/index";
 import jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
-import { UserService } from "../services/user_services";
+import { addUser, checkUserExistencyByEmail, getUserByEmail } from "../services/user_services";
 
-const userService = new UserService();
 
 const register = async (req: Request, res: Response) => {
   //retieve email and password
@@ -29,7 +28,7 @@ const register = async (req: Request, res: Response) => {
   }
 
   //check if the email already exists
-  const userExists = await userService.checkUserExistencyByEmail(email);
+  const userExists = await checkUserExistencyByEmail(email);
   if (userExists)
     return res.json({
       success: false,
@@ -38,7 +37,7 @@ const register = async (req: Request, res: Response) => {
 
   //add user into database
   //...
-  const doc = await userService.addUser({
+  const doc = await addUser({
     email: email,
     password: hashedPassword,
     createdOn: Date.now(),
@@ -78,7 +77,7 @@ const login = async (req: Request, res: Response) => {
     });
   }
   //get user from database
-  const doc = await userService.getUserByEmail(email);
+  const doc = await getUserByEmail(email);
   if (!doc) {
     return res.json({
       success: false,
