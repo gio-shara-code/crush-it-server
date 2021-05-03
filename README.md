@@ -64,7 +64,7 @@ If you are in the right directory, you will see these files:
 
 `npm install`
 
-After executing this command, the following folder will be created: **node_modules**. This folder contains bunch of dependencies for starting your server.
+After executing this command, the following folder will be created: **node_modules**. This folder contains a bunch of dependencies for starting your server.
 
 ### 3. Start The Server
 
