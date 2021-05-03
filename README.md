@@ -106,7 +106,7 @@ That means:
 - 2 circuits require 3 queries
 - 3 cir. -> 4 queries etc.
 
-This is probably not the best solution since we are querying a lot and therefore it's inefficient, although we would have exercise info as a stand-alone document so it's would be easier to search and update independently. 
+This is probably not the best solution since we are querying a lot and therefore it's inefficient, although we would have exercise info as a stand-alone document so it would be easier to search and update independently. 
 
 ### 2nd Option
 ![Algorithm schema](./images/schema_02.png)
