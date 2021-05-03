@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { addUser as addUserToDB } from "../services/user_services";
+import * as userServices from "../services/user_services";
 
 const addUser = async (req: Request, res: Response) => {
-  const doc = await addUserToDB({
+  const doc = await userServices.addUser({
     email: "gio@demo.com",
     createdOn: Date.now(),
     password: "gio123",
@@ -23,11 +23,17 @@ const addUser = async (req: Request, res: Response) => {
 
 const getUserById = async (req: Request, res: Response) => {
   const query = req.params;
-
-  console.log(query);
+  const user = await userServices.getUserById(query.id);
+  console.log(user);
+  if(!user) {
+    return res.json({
+      success: false,
+      message: "User not found."
+    });
+  }
   res.json({
     success: true,
-    id: req.body.userId,
+    user: user,
   });
 };
 

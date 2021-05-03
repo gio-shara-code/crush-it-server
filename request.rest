@@ -24,5 +24,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/user/123 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzkzYjNlM2Q4MzQ5ZDY0MWVlYmU4YSIsImVtYWlsIjoiZ2lvcmdpQGdtYWlsLmNvbSIsImlhdCI6MTYxODU1ODYxMn0.vtnEcROyHSHqpHEmRTkcpPzTTkFuo1EAP9UdKK4mO_U
+GET http://localhost:3000/user/608fc0e4c3240b681cc2fed8 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGZjMGU0YzMyNDBiNjgxY2MyZmVkOCIsImVtYWlsIjoiZ2lvcmdpQGdtYWlsLmNvbSIsImlhdCI6MTYyMDAzMzc3Nn0.3lSkwXYXnAJYxk2iSiskXlb_RbiUAAjOso00KglqLzA
