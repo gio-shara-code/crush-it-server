@@ -2,8 +2,7 @@ import { Request, Response } from "express";
 import config from "../config/index";
 import jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
-import { addUser, checkUserExistencyByEmail, getUserByEmail } from "../services/user_services";
-
+import * as userServices from "../services/user_services";
 
 const register = async (req: Request, res: Response) => {
   //retieve email and password
@@ -28,7 +27,7 @@ const register = async (req: Request, res: Response) => {
   }
 
   //check if the email already exists
-  const userExists = await checkUserExistencyByEmail(email);
+  const userExists = await userServices.checkUserExistencyByEmail(email);
   if (userExists)
     return res.json({
       success: false,
@@ -37,11 +36,12 @@ const register = async (req: Request, res: Response) => {
 
   //add user into database
   //...
-  const doc = await addUser({
+  const doc = await userServices.addUser({
     email: email,
     password: hashedPassword,
     createdOn: Date.now(),
     name: name,
+    workouts: []
   });
   if (!doc) {
     return res.json({
@@ -77,7 +77,7 @@ const login = async (req: Request, res: Response) => {
     });
   }
   //get user from database
-  const doc = await getUserByEmail(email);
+  const doc = await userServices.getUserByEmail(email);
   if (!doc) {
     return res.json({
       success: false,
@@ -102,9 +102,13 @@ const login = async (req: Request, res: Response) => {
 
   //generate token using jwt
   try {
-    const token = await jwt.sign({ id: doc._id, email: doc.email }, config.jWTSecretKey, {
-      algorithm: "HS256",
-    });
+    const token = await jwt.sign(
+      { id: doc._id, email: doc.email },
+      config.jWTSecretKey,
+      {
+        algorithm: "HS256",
+      }
+    );
     res.json({ success: true, token: token });
   } catch {
     res.json({

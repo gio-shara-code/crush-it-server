@@ -7,7 +7,9 @@ const addUser = async (req: Request, res: Response) => {
     createdOn: Date.now(),
     password: "gio123",
     name: "Giorgi Sharashenidze",
+    workouts: [],
   });
+
   if (!doc) {
     res.json({
       success: false,
@@ -25,10 +27,10 @@ const getUserById = async (req: Request, res: Response) => {
   const query = req.params;
   const user = await userServices.getUserById(query.id);
   console.log(user);
-  if(!user) {
+  if (!user) {
     return res.json({
       success: false,
-      message: "User not found."
+      message: "User not found.",
     });
   }
   res.json({

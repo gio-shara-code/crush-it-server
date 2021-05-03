@@ -25,4 +25,14 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/user/608fc0e4c3240b681cc2fed8 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGZjMGU0YzMyNDBiNjgxY2MyZmVkOCIsImVtYWlsIjoiZ2lvcmdpQGdtYWlsLmNvbSIsImlhdCI6MTYyMDAzMzc3Nn0.3lSkwXYXnAJYxk2iSiskXlb_RbiUAAjOso00KglqLzA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGZkZWNjNjZmNDgwNzcwYzA5M2Q2ZSIsImVtYWlsIjoiZ2lvcmdpQGdtYWlsLmNvbSIsImlhdCI6MTYyMDA0MTQyMH0.a3pINzy3tjPGcO55oV2ZDD_5-EGDcBew0ipVbTp3h88
+
+###
+
+GET http://localhost:3000/workouts HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGZkZWNjNjZmNDgwNzcwYzA5M2Q2ZSIsImVtYWlsIjoiZ2lvcmdpQGdtYWlsLmNvbSIsImlhdCI6MTYyMDA0MTQyMH0.a3pINzy3tjPGcO55oV2ZDD_5-EGDcBew0ipVbTp3h88
+
+###
+
+POST http://localhost:3000/workout HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGZkZWNjNjZmNDgwNzcwYzA5M2Q2ZSIsImVtYWlsIjoiZ2lvcmdpQGdtYWlsLmNvbSIsImlhdCI6MTYyMDA0MTQyMH0.a3pINzy3tjPGcO55oV2ZDD_5-EGDcBew0ipVbTp3h88
