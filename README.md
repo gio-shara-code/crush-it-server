@@ -1,4 +1,4 @@
-# Crush-It (Server-Side)
+# Crush-It
 
 This is a repo for crush-it which contains **server-side code**. The front-end code is in the different repo.
 
