@@ -7,7 +7,7 @@ POST http://localhost:3000/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "giorgi@gmail.com",
+    "email": "gio123@gmail.com",
     "password": "shara123",
     "name": "Giorgi Sharashenidze"
 }
@@ -18,19 +18,19 @@ POST http://localhost:3000/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "giorgi@gmail.com",
+    "email": "gio123@gmail.com",
     "password": "shara123"
 }
 
 ###
 
-GET http://localhost:3000/user/608fc0e4c3240b681cc2fed8 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGZkZWNjNjZmNDgwNzcwYzA5M2Q2ZSIsImVtYWlsIjoiZ2lvcmdpQGdtYWlsLmNvbSIsImlhdCI6MTYyMDA0MTQyMH0.a3pINzy3tjPGcO55oV2ZDD_5-EGDcBew0ipVbTp3h88
+GET http://localhost:3000/user/609211b3b21546ac88dd257a HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTIwZjk5ZTIwYmUxYWI2ZjQ0MGJlMCIsImVtYWlsIjoiZ2lvQGdtYWlsLmNvbSIsImlhdCI6MTYyMDE4NDk4NX0.pHnnIH3xhQiBXD7u657FXORWomxSvhcto9jl4CkjhXU
 
 ###
 
 GET http://localhost:3000/workouts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGZkZWNjNjZmNDgwNzcwYzA5M2Q2ZSIsImVtYWlsIjoiZ2lvcmdpQGdtYWlsLmNvbSIsImlhdCI6MTYyMDA0MTQyMH0.a3pINzy3tjPGcO55oV2ZDD_5-EGDcBew0ipVbTp3h88
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTIyYmQ2NGI1NmY4YmI0NjVmZWM1OSIsImVtYWlsIjoiZ2lvMTIzQGdtYWlsLmNvbSIsImlhdCI6MTYyMDE5MjIxNH0.4ajODENbOkIRMgF-7bcPowvsHB9EujbO7Rs5sNo7Dss
 
 ###
 

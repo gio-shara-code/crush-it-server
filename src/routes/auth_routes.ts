@@ -3,6 +3,7 @@ import config from "../config/index";
 import jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
 import * as userServices from "../services/user_services";
+import { defaultExercises } from "../const";
 
 const register = async (req: Request, res: Response) => {
   //retieve email and password
@@ -41,7 +42,8 @@ const register = async (req: Request, res: Response) => {
     password: hashedPassword,
     createdOn: Date.now(),
     name: name,
-    workouts: []
+    workouts: [],
+    exercises: defaultExercises,
   });
   if (!doc) {
     return res.json({

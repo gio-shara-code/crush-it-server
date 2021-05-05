@@ -1,28 +1,16 @@
 import mongoose, { Schema, Types } from "mongoose";
-
-interface WorkoutInterface {
-  description: string;
-  name: string;
-  set_total_amount: number;
-  exercise_total_amount: number;
-}
+import { Workout } from "../interfaces/workout";
 
 const workoutSchema = new Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  exercise_total_amount: { type: Number, required: true },
-  set_total_amount: { type: String, required: true },
+  name: { type: String, required: false },
+  description: { type: String, required: false },
+  exercise_total_amount: { type: Number, required: false },
+  set_total_amount: { type: String, required: false },
 });
 
-type WorkoutModelAndSubDocument = WorkoutInterface & Types.Subdocument;
-
-export default mongoose.model<WorkoutModelAndSubDocument>(
+export default mongoose.model<Workout & Types.Subdocument>(
   "Workout",
   workoutSchema
 );
 
-export {
-  WorkoutInterface,
-  workoutSchema,
-  WorkoutModelAndSubDocument as WorkoutModelAndDocument,
-};
+export { Workout as WorkoutInterface, workoutSchema };

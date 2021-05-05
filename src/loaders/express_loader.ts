@@ -17,7 +17,7 @@ const expressLoader = async (app: Application) => {
   app.get("/user/:id", verifyToken, userRoutes.getUserById); //get user with a certain id
 
   app.get("/workouts", verifyToken, workoutRoutes.workouts);
-  app.post("/workout", verifyToken, workoutRoutes.addWorkout);
+  app.post("/workout", workoutRoutes.addWorkout);
 
   //app.get(/users) //for retrieving the users
   //app.post(/users or /user) //for retrieving the users

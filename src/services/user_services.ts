@@ -1,7 +1,8 @@
-import UserModel, { UserInterface } from "../models/user_model";
+import UserModel from "../models/user_model";
 import { Types } from "mongoose";
+import { User } from "../interfaces/user";
 
-const addUser = async (user: UserInterface) => {
+const addUser = async (user: User) => {
   const usr = new UserModel(user);
   try {
     const doc = await usr.save();

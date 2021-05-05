@@ -21,7 +21,7 @@ const getWorkouts = async (userId: string) => {
 
 const addWorkout = async (userId: string) => {
   const user = new UserModel();
-  user.workouts.push({
+  user.workouts?.push({
     description: "asdf",
     exercise_total_amount: 20,
     name: "Workout Name",

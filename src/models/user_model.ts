@@ -1,12 +1,8 @@
-import mongoose, { Schema, Document, Types } from "mongoose";
-import { workoutSchema, WorkoutInterface } from "./workout_model";
-export interface UserInterface {
-  email: string;
-  name: string;
-  password: string;
-  createdOn: number;
-  workouts: WorkoutInterface[];
-}
+import { model, Schema, Document } from "mongoose";
+import { workoutSchema } from "./workout_model";
+import { User } from "../interfaces/user";
+import { exerciseSchema } from "./exercise_model";
+//When creating a document
 
 const userSchema = new Schema({
   email: { type: String, required: true },
@@ -14,8 +10,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   createdOn: { type: Number, required: true },
   workouts: [workoutSchema],
+  exercises: [exerciseSchema],
 });
 
-type UserModelAndDocument = UserInterface & Document;
-
-export default mongoose.model<UserModelAndDocument>("User", userSchema);
+export default model<User & Document>("User", userSchema);

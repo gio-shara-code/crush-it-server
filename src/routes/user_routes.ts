@@ -2,25 +2,21 @@ import { Request, Response } from "express";
 import * as userServices from "../services/user_services";
 
 const addUser = async (req: Request, res: Response) => {
-  const doc = await userServices.addUser({
-    email: "gio@demo.com",
-    createdOn: Date.now(),
-    password: "gio123",
-    name: "Giorgi Sharashenidze",
-    workouts: [],
-  });
+  // const doc = await userServices.addUser();
+  let doc;
+  // let newSubDoc = <any>{ property1: "example1", property2: "example2" };
+  // doc.workouts.push(newSubDoc);
 
   if (!doc) {
-    res.json({
+    return res.json({
       success: false,
       message: "We couldn't add the user",
     });
-  } else {
-    res.json({
-      success: true,
-      doc: doc,
-    });
   }
+  res.json({
+    success: true,
+    doc: doc,
+  });
 };
 
 const getUserById = async (req: Request, res: Response) => {
