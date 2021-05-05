@@ -41,3 +41,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGZkZWNjN
 
 GET http://localhost:3000/exercises HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTIyYmQ2NGI1NmY4YmI0NjVmZWM1OSIsImVtYWlsIjoiZ2lvMTIzQGdtYWlsLmNvbSIsImlhdCI6MTYyMDE5MjkwMH0.4ARECP55QSVa23RRKLJVOlL4o92MHZV3Lv7IeUHs7Po
+
+###
+
+POST http://localhost:3000/exercise HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTIyYmQ2NGI1NmY4YmI0NjVmZWM1OSIsImVtYWlsIjoiZ2lvMTIzQGdtYWlsLmNvbSIsImlhdCI6MTYyMDE5ODQzMH0.4hrWsvuuwbVD2nE-BKozVQ7JGIkwgUnLaNTumPOpXUk

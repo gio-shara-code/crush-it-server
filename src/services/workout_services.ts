@@ -43,20 +43,6 @@ const addWorkout = async (userId: string) => {
     success: true,
     user_doc: userDoc,
   });
-
-  // let userDoc;
-  // try {
-  //   userDoc = await userServ.getUserById(userId);
-  // } catch (e) {
-  //   console.log(`wokout_services [addWorkout]: fetching userDoc failed: ${e}`);
-  //   return;
-  // }
-  // return userDoc?.workouts.push({
-  //   description: "asdf",
-  //   exercise_total_amount: 20,
-  //   name: "Workout Name",
-  //   set_total_amount: 10,
-  // });
 };
 
 export { getWorkouts, addWorkout };
