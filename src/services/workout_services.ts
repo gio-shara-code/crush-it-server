@@ -1,4 +1,3 @@
-import ExerciseModel, { WorkoutInterface } from "../models/workout_model";
 import UserModel from "../models/user_model";
 // import { Types } from "mongoose";
 import * as userServ from "./user_services";
