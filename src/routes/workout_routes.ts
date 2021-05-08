@@ -12,7 +12,6 @@ const workouts = async (req: Request, res: Response) => {
     return res.json({ success: false, message: "Something went wrong" });
   }
   res.json({ success: true, workouts: workouts });
-
   //   const workouts = await workoutServices.getWorkouts(req.body.userId);
 };
 
@@ -28,5 +27,4 @@ const addWorkout = async (req: Request, res: Response) => {
   }
   return res.json({ success: true, workout: workout });
 };
-
 export { workouts, addWorkout };

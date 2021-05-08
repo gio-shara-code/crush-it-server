@@ -1,11 +1,11 @@
 import mongoose, { Schema, Types } from "mongoose";
 
 const exerciseSchema = new Schema({
-  name: { type: String, required: false },
-  type: { type: String, required: false },
   reps_amount: { type: Number, required: false },
-  break_sec: { type: Number, required: false },
   exercise_time_sec: { type: Number, required: false },
+  exercise_type: { type: String, required: true },
+  name: { type: String, required: true },
+  break_sec: { type: Number, required: true },
 });
 
 export default mongoose.model<Exercise & Types.Subdocument>(

@@ -11,6 +11,12 @@ const userSchema = new Schema({
   createdOn: { type: Number, required: true },
   workouts: [workoutSchema],
   exercises: [exerciseSchema],
+  workout_settings: {
+    sound_enabled: {
+      type: String,
+      required: true
+    }
+  }
 });
 
 export default model<User & Document>("User", userSchema);

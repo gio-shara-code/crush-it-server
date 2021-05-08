@@ -1,7 +1,10 @@
 import UserModel from "../models/user_model";
-// import { Types } from "mongoose";
+import WorkoutModel from "../models/workout_model";
+import { Types } from "mongoose";
+
 import * as userServ from "./user_services";
 import { response } from "express";
+import { mongooseLoader } from "../loaders/mongoose_loader";
 const getWorkouts = async (userId: string) => {
   let userDoc;
   try {
@@ -45,4 +48,15 @@ const addWorkout = async (userId: string) => {
   });
 };
 
-export { getWorkouts, addWorkout };
+const getWorkoutById = async (id: string) => {
+  let workout;
+  try {
+    workout = await WorkoutModel.find({ _id: new Types.ObjectId(id) });
+  } catch (e) {
+    console.log(`Couldn't find workout by id ${id}. ${e}`);
+    return;
+  }
+
+  return workout;
+};
+export { getWorkouts, addWorkout, getWorkoutById };
