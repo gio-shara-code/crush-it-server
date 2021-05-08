@@ -1,39 +1,39 @@
-import { Request, Response } from "express";
-import config from "../config/index";
-import jwt from "jsonwebtoken";
-import * as bcrypt from "bcrypt";
-import * as userServices from "../services/user_services";
-import { defaultExercises } from "../const";
+import { Request, Response } from "express"
+import config from "../config/index"
+import jwt from "jsonwebtoken"
+import * as bcrypt from "bcrypt"
+import * as userServices from "../services/user_services"
+import { defaultExercises } from "../const"
 
 const register = async (req: Request, res: Response) => {
   //retieve email and password
-  const { email, password, name } = req.body;
+  const { email, password, name } = req.body
   //check if email and password exist in the body
   if (!email || !password || !name) {
     return res.json({
       success: false,
-      message: "Please provide neccessary fields for the registration!",
-    });
+      message: "Please provide neccessary fields for the registration!"
+    })
   }
 
   //hash password
-  let hashedPassword;
+  let hashedPassword
   try {
-    hashedPassword = await bcrypt.hash(password, 10);
+    hashedPassword = await bcrypt.hash(password, 10)
   } catch {
     return res.json({
       success: false,
-      message: "Internal server error: hashing password failed",
-    });
+      message: "Internal server error: hashing password failed"
+    })
   }
 
   //check if the email already exists
-  const userExists = await userServices.checkUserExistencyByEmail(email);
+  const userExists = await userServices.checkUserExistencyByEmail(email)
   if (userExists)
     return res.json({
       success: false,
-      message: `User with the email ${email} exists alreaady`,
-    });
+      message: `User with the email ${email} exists alreaady`
+    })
 
   //add user into database
   //...
@@ -44,12 +44,15 @@ const register = async (req: Request, res: Response) => {
     name: name,
     workouts: [],
     exercises: defaultExercises,
-  });
+    workout_settings: {
+      sound_enabled: true
+    }
+  })
   if (!doc) {
     return res.json({
       success: false,
-      message: "Internal server: Writing user info into database failed",
-    });
+      message: "Internal server: Writing user info into database failed"
+    })
   }
 
   //signing token
@@ -58,66 +61,69 @@ const register = async (req: Request, res: Response) => {
       { id: doc._id, email: doc.email },
       config.jWTSecretKey,
       {
-        algorithm: "HS256",
+        algorithm: "HS256"
       }
-    );
-    res.json({ success: true, token: token });
+    )
+    res.json({ success: true, token: token })
   } catch {
     res.json({
       message: "Internal server: signing jwt failed!",
-      success: false,
-    });
+      success: false
+    })
   }
-};
+}
 
 const login = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body
   if (!email || !password) {
     return res.json({
       success: false,
-      message: "Email or/and password is missing!",
-    });
+      message: "Email or/and password is missing!"
+    })
   }
   //get user from database
-  const doc = await userServices.getUserByEmail(email);
+  const doc = await userServices.getUserByEmail(email)
   if (!doc) {
     return res.json({
       success: false,
-      message: `Your email ${email} doesn't exist`,
-    });
+      message: `Your email ${email} doesn't exist`
+    })
   }
 
   //Check if the password is correct
+  if (doc.password === undefined) return
+
+  let correctPassword
   try {
-    const success = await bcrypt.compare(password, doc.password);
-    if (!success)
-      return res.json({
-        success: false,
-        message: "Password is wrong!",
-      });
+    correctPassword = await bcrypt.compare(password, doc.password)
   } catch {
-    res.json({
+    return res.json({
       success: false,
-      message: "Internal server: comparing password doesn't work.",
-    });
+      message: "Internal server: comparing password doesn't work."
+    })
   }
+
+  if (!correctPassword)
+    return res.json({
+      success: false,
+      message: "Password is wrong!"
+    })
 
   //generate token using jwt
+  let token
   try {
-    const token = await jwt.sign(
+    token = await jwt.sign(
       { id: doc._id, email: doc.email },
       config.jWTSecretKey,
-      {
-        algorithm: "HS256",
-      }
-    );
-    res.json({ success: true, token: token });
-  } catch {
-    res.json({
-      message: "We couldn't generate a token for you!",
-      success: false,
-    });
+      { algorithm: "HS256" }
+    )
+  } catch (e) {
+    return res.json({
+      message: "auth_routes [login]: Token generation failed!",
+      success: false
+    })
   }
-};
+  res.json({ success: true, token: token })
+}
 
-export { register, login };
+export { register, login }

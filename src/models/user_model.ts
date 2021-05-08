@@ -1,13 +1,13 @@
-import { model, Schema, Document } from "mongoose";
-import { workoutSchema } from "./workout_model";
-import { User } from "../interfaces/user";
-import { exerciseSchema } from "./exercise_model";
+import { model, Schema, Document } from "mongoose"
+import { workoutSchema } from "./workout_model"
+import { User } from "../interfaces/user"
+import { exerciseSchema } from "./exercise_model"
 //When creating a document
 
 const userSchema = new Schema({
   email: { type: String, required: true },
   name: { type: String, required: true },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   createdOn: { type: Number, required: true },
   workouts: [workoutSchema],
   exercises: [exerciseSchema],
@@ -17,6 +17,6 @@ const userSchema = new Schema({
       required: true
     }
   }
-});
+})
 
-export default model<User & Document>("User", userSchema);
+export default model<User & Document>("User", userSchema)

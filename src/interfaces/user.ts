@@ -1,10 +1,14 @@
-import { Workout } from "./workout";
+import { Exercise } from "./exercise"
+import { Workout } from "./workout"
 
 export interface User {
-  email: string;
-  name: string;
-  password: string;
-  createdOn?: number;
-  workouts?: Workout[];
-  exercises: Exercise[];
+  email: string
+  name: string
+  createdOn: number
+  exercises: Exercise[]
+  workout_settings: {
+    sound_enabled: boolean
+  }
+  workouts?: Workout[]
+  password?: string
 }

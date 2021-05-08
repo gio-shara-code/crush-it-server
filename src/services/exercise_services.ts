@@ -1,3 +1,4 @@
+import { Exercise } from "../interfaces/exercise";
 import { exerciseSchema } from "../models/exercise_model";
 import UserModel from "../models/user_model";
 import * as userServ from "./user_services";
