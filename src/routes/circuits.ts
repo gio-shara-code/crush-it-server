@@ -20,11 +20,11 @@ const circuits = async (req: Request, res: Response) => {
       message: `circuits.ts [circuits]: fetching workout by id failed. ${e}`,
     });
   }
-  
-  let circuits;
-  try {
-    circuits = await 
-  }catch() {
 
-  }
+  // let circuits;
+  // try {
+  //   circuits = await
+  // }catch() {
+
+  // }
 };

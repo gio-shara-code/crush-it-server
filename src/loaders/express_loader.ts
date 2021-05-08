@@ -15,19 +15,14 @@ const expressLoader = async (app: Application) => {
 
   app.post("/register", authRoutes.register);
   app.post("/login", authRoutes.login);
-  app.get("/user/:id", verifyToken, userRoutes.getUserById); //get user with a certain id
 
+  app.get("/user/", verifyToken, userRoutes.getUser);
   app.get("/workouts", verifyToken, workoutRoutes.workouts);
+
   app.post("/workout", workoutRoutes.addWorkout);
 
   app.get("/exercises", verifyToken, exerciseRoutes.exercises);
   app.post("/exercise", verifyToken, exerciseRoutes.addExercise);
-
-  //app.get(/users) //for retrieving the users
-  //app.post(/users or /user) //for retrieving the users
-  //app.post(/user-edit-id) //for retrieving the users
-  //New commit
-  //Another commit
 };
 
 export { expressLoader };

@@ -24,7 +24,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/user/609211b3b21546ac88dd257a HTTP/1.1
+GET http://localhost:3000/user/ HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTIwZjk5ZTIwYmUxYWI2ZjQ0MGJlMCIsImVtYWlsIjoiZ2lvQGdtYWlsLmNvbSIsImlhdCI6MTYyMDE4NDk4NX0.pHnnIH3xhQiBXD7u657FXORWomxSvhcto9jl4CkjhXU
 
 ###

@@ -1,6 +1,3 @@
-import CircuitModel from "../models/"
+import CircuitModel from "../models/circuit_model";
 
-const getCircuits = async () => {
-
-
-}
+const getCircuits = async () => {};
