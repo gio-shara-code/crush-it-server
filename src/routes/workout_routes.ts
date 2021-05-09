@@ -3,6 +3,7 @@ import * as workoutServices from "../services/workout_services"
 import * as circuitServices from "../services/circuit_services"
 import * as userServices from "../services/user_services"
 import {Circuit} from "../interfaces/circuit"
+import {Types} from "mongoose"
 
 const addWorkout = async (req: Request, res: Response) => {
   const {workoutName, workoutDescription, circuits} = req.body
@@ -45,22 +46,63 @@ const addWorkout = async (req: Request, res: Response) => {
   if (!workout) return res.json({success: false, message: "Adding workout failed."})
 
   //user update
-  const workoutId = await userServices.pushUserWorkoutId(req.body.userId, workout._id)
-  if (!workoutId) return res.json({success: false, workoutId: "Adding workout failed."})
-  res.json({success: true, workoutId: workoutId})
+  const user = await userServices.getUserById(req.body.userId)
+  if (!user) {
+    console.log(`Fetching user by id either failed or not found!`)
+    return
+  }
+  user.workouts?.push(workout._id)
+
+  const userDoc = await userServices.saveUser(user)
+  if (!userDoc) {
+    return res.json({success: false, workoutId: "Adding workout failed."})
+  }
+
+  res.json({success: true, workoutId: userDoc})
 }
 
 const workouts = async (req: Request, res: Response) => {
-  let workouts
-  try {
-    workouts = await workoutServices.getWorkouts(req.body.userId)
-    if (!workouts) {
-      return res.json({success: false})
-    }
-  } catch (e) {
-    return res.json({success: false, message: "Something went wrong"})
+  //find the user
+  const user = await userServices.getUserById(req.body.userId)
+  if (!user) {
+    return res.json({
+      success: false,
+      message: "Fetching a user failed"
+    })
   }
-  res.json({success: true, workouts: workouts})
+  if (user.workouts.length === 0) {
+    return res.json({
+      success: true,
+      workouts: []
+    })
+  }
+
+  const workoutsIds = user.workouts.map((workoutId) => Types.ObjectId(`${workoutId}`))
+  const workoutDocs = await workoutServices.getWorkoutsBasedOnIds(workoutsIds)
+  if (!workoutDocs) {
+    return res.json({
+      success: false,
+      message: "Fetching workouts failed!"
+    })
+  }
+  res.json({
+    success: true,
+    workouts: workoutDocs
+  })
+
+  //find workouts based on the ids
+  //
+
+  // let workouts
+  // try {
+  //   workouts = await workoutServices.getWorkouts(req.body.userId)
+  //   if (!workouts) {
+  //     return res.json({success: false})
+  //   }
+  // } catch (e) {
+  //   return res.json({success: false, message: "Something went wrong"})
+  // }
+  // res.json({success: true, workouts: workouts})
   //   const workouts = await workoutServices.getWorkouts(req.body.userId);
 }
 

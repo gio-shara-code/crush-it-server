@@ -1,5 +1,5 @@
 import UserModel from "../models/user_model"
-import {Types} from "mongoose"
+import {Types, Document} from "mongoose"
 import {User} from "../interfaces/user"
 
 const addUser = async (user: User) => {
@@ -51,22 +51,15 @@ const checkUserExistencyByEmail = async (email: string): Promise<boolean> => {
   return false
 }
 
-const pushUserWorkoutId = async (userId: string, workoutId: string) => {
-  let user
-  user = await getUserById(userId)
-  if (!user) {
-    console.log(`Fetching user by id either failed or not found!`)
-    return
-  }
-  user.workouts?.push(workoutId)
-
+const saveUser = async (user: User & Document) => {
+  let userDoc
   try {
-    user = await user.save()
+    userDoc = await user.save()
   } catch (e) {
-    console.log(`user_services[pushUserWorkoutId]: Saving user into database failed. ${e}`)
+    console.log(`user_services[userSave]: Saving user into database failed. ${e}`)
     return
   }
-  return workoutId
+  return userDoc
 }
 
-export {addUser, getUserById, checkUserExistencyByEmail, getUserByEmail, pushUserWorkoutId}
+export {addUser, getUserById, checkUserExistencyByEmail, getUserByEmail, saveUser}

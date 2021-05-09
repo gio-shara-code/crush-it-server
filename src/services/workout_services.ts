@@ -30,17 +30,29 @@ const addWorkout = async (workout: Workout) => {
   return workoutDoc
 }
 
-const getWorkoutById = async (id: string) => {
+const getWorkoutById = async (workoutId: string) => {
   let workout
   try {
     workout = await WorkoutModel.find({
-      _id: new Types.ObjectId(id)
+      _id: new Types.ObjectId(workoutId)
     })
   } catch (e) {
-    console.log(`Couldn't find workout by id ${id}. ${e}`)
+    console.log(`Couldn't find workout by id. ${e}`)
     return
   }
 
   return workout
 }
-export {getWorkouts, addWorkout, getWorkoutById}
+
+const getWorkoutsBasedOnIds = async (workoutIds: Types.ObjectId[]) => {
+  let workoutDocs
+  try {
+    workoutDocs = await WorkoutModel.find({_id: {$in: workoutIds}})
+  } catch (e) {
+    console.log(`Fetching workouts based on ids failed. ${e}`)
+    return
+  }
+
+  return workoutDocs
+}
+export {getWorkouts, addWorkout, getWorkoutById, getWorkoutsBasedOnIds}
