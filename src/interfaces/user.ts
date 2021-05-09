@@ -1,14 +1,11 @@
-import { Exercise } from "./exercise"
-import { Workout } from "./workout"
-
 export interface User {
   email: string
   name: string
   createdOn: number
-  exercises: Exercise[]
-  workout_settings: {
-    sound_enabled: boolean
+  exerciseIds: String[]
+  workoutSettings: {
+    soundEnabled: boolean
   }
-  workouts?: Workout[]
+  workouts?: String[]
   password?: string
 }

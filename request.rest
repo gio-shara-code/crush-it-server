@@ -19,4 +19,21 @@ Content-Type: application/json
 ###
 //user works
 GET http://localhost:3000/user HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTYyNWQ2M2Y0OGVjMTJhNTYzOWQ2NyIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA0NTI4MjJ9.6z-lZ0pQvwF9Txv_FGN6RzMmKI6i2LX57MLDHE1tImE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+
+###
+POST http://localhost:3000/workout HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+Content-Type: application/json
+
+{
+    "workoutName": "Workout 1",
+    "workoutDescription": "Some description",
+    "circuits": [
+        {
+            "setAmount": 0,
+            "timeBetweenSetsSec": 0,
+            "exercises": []
+        }
+    ]
+}

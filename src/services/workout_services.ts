@@ -1,62 +1,46 @@
-import UserModel from "../models/user_model";
-import WorkoutModel from "../models/workout_model";
-import { Types } from "mongoose";
-
-import * as userServ from "./user_services";
-import { response } from "express";
-import { mongooseLoader } from "../loaders/mongoose_loader";
+import WorkoutModel, {Workout} from "../models/workout_model"
+import {Types} from "mongoose"
+import * as userServ from "./user_services"
 const getWorkouts = async (userId: string) => {
-  let userDoc;
+  let userDoc
   try {
-    userDoc = await userServ.getUserById(userId);
+    userDoc = await userServ.getUserById(userId)
   } catch (e) {
-    console.log(`wokout_services [getWorkouts]: fetching userDoc failed: ${e}`);
-    return;
+    console.log(`wokout_services [getWorkouts]: fetching userDoc failed: ${e}`)
+    return
   }
 
   if (!userDoc) {
-    console.log(`wokout_services [getWorkouts]: user document is undefined.`);
-    return;
+    console.log(`wokout_services [getWorkouts]: user document is undefined.`)
+    return
   }
-  return userDoc.workouts;
-};
+  return userDoc.workouts
+}
 
-const addWorkout = async (userId: string) => {
-  const user = new UserModel();
-  user.workouts?.push({
-    description: "asdf",
-    exercise_total_amount: 20,
-    name: "Workout Name",
-    set_total_amount: 10,
-  });
+const addWorkout = async (workout: Workout) => {
+  const workoutModel = new WorkoutModel(workout)
 
-  let userDoc;
+  let workoutDoc
   try {
-    userDoc = await user.save();
+    workoutDoc = await workoutModel.save()
   } catch (e) {
-    console.log(
-      `wokout_service[addWorkout]: Adding workout into database failed. ${e}`
-    );
-    return response.json({
-      success: false,
-      message: "Adding workout into database failed.",
-    });
+    console.log(`workout_service[addWorkout]: Adding workout into database failed. ${e}`)
+    return
   }
-  response.json({
-    success: true,
-    user_doc: userDoc,
-  });
-};
+  return workoutDoc
+}
 
 const getWorkoutById = async (id: string) => {
-  let workout;
+  let workout
   try {
-    workout = await WorkoutModel.find({ _id: new Types.ObjectId(id) });
+    workout = await WorkoutModel.find({
+      _id: new Types.ObjectId(id)
+    })
   } catch (e) {
-    console.log(`Couldn't find workout by id ${id}. ${e}`);
-    return;
+    console.log(`Couldn't find workout by id ${id}. ${e}`)
+    return
   }
 
-  return workout;
-};
-export { getWorkouts, addWorkout, getWorkoutById };
+  return workout
+}
+export {getWorkouts, addWorkout, getWorkoutById}

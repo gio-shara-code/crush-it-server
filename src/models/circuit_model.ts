@@ -1,13 +1,12 @@
-import { model, Schema, Types } from "mongoose";
-import { exerciseSchema } from "./exercise_model";
+import {model, Schema, Types} from "mongoose"
+import {exerciseSchema} from "./exercise_model"
 
 const circuitSchema = new Schema({
-  set_amount: { type: Number, required: true},
-  time_between_sets_sec: { type: Number, required: true},
-  order: {type: Number, required: true},
-  exercises: [exerciseSchema],
-});
+  setAmount: {type: Number, required: true},
+  timeBetweenSetsSec: {type: Number, required: true},
+  exercises: {type: [exerciseSchema], required: false}
+})
 
-export default model<Exercise & Types.Subdocument>("Circuit", circuitSchema);
+export default model("Circuit", circuitSchema)
 
-export { circuitSchema };
+export {circuitSchema}

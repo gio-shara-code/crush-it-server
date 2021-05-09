@@ -1,4 +1,5 @@
 import mongoose, { Schema, Types } from "mongoose";
+import { Exercise } from "../interfaces/exercise";
 
 const exerciseSchema = new Schema({
   reps_amount: { type: Number, required: false },

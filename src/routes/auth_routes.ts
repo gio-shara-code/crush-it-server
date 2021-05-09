@@ -1,13 +1,15 @@
-import { Request, Response } from "express"
+import {Request, Response} from "express"
 import config from "../config/index"
 import jwt from "jsonwebtoken"
 import * as bcrypt from "bcrypt"
 import * as userServices from "../services/user_services"
-import { defaultExercises } from "../const"
+import * as exerciseServices from "../services/exercise_services"
+
+import {defaultExercises} from "../const"
 
 const register = async (req: Request, res: Response) => {
   //retieve email and password
-  const { email, password, name } = req.body
+  const {email, password, name} = req.body
   //check if email and password exist in the body
   if (!email || !password || !name) {
     return res.json({
@@ -35,6 +37,8 @@ const register = async (req: Request, res: Response) => {
       message: `User with the email ${email} exists alreaady`
     })
 
+  //Insert many exercises
+
   //add user into database
   //...
   const doc = await userServices.addUser({
@@ -43,9 +47,9 @@ const register = async (req: Request, res: Response) => {
     createdOn: Date.now(),
     name: name,
     workouts: [],
-    exercises: defaultExercises,
-    workout_settings: {
-      sound_enabled: true
+    exerciseIds: [],
+    workoutSettings: {
+      soundEnabled: true
     }
   })
   if (!doc) {
@@ -57,14 +61,10 @@ const register = async (req: Request, res: Response) => {
 
   //signing token
   try {
-    const token = await jwt.sign(
-      { id: doc._id, email: doc.email },
-      config.jWTSecretKey,
-      {
-        algorithm: "HS256"
-      }
-    )
-    res.json({ success: true, token: token })
+    const token = await jwt.sign({id: doc._id, email: doc.email}, config.jWTSecretKey, {
+      algorithm: "HS256"
+    })
+    res.json({success: true, token: token})
   } catch {
     res.json({
       message: "Internal server: signing jwt failed!",
@@ -74,7 +74,7 @@ const register = async (req: Request, res: Response) => {
 }
 
 const login = async (req: Request, res: Response) => {
-  const { email, password } = req.body
+  const {email, password} = req.body
   if (!email || !password) {
     return res.json({
       success: false,
@@ -112,18 +112,16 @@ const login = async (req: Request, res: Response) => {
   //generate token using jwt
   let token
   try {
-    token = await jwt.sign(
-      { id: doc._id, email: doc.email },
-      config.jWTSecretKey,
-      { algorithm: "HS256" }
-    )
+    token = await jwt.sign({id: doc._id, email: doc.email}, config.jWTSecretKey, {
+      algorithm: "HS256"
+    })
   } catch (e) {
     return res.json({
       message: "auth_routes [login]: Token generation failed!",
       success: false
     })
   }
-  res.json({ success: true, token: token })
+  res.json({success: true, token: token})
 }
 
-export { register, login }
+export {register, login}

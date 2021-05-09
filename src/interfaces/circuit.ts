@@ -1,7 +1,8 @@
+import {Exercise} from "./exercise"
+
 export interface Circuit {
-  sets_amount: number;
-  time_between_sets_sec: number;
-  name: string;
-  order: number;
-  exercises: string[];
+  _id?: string
+  setAmount: number
+  timeBetweenSetsSec: number
+  exercises?: Exercise[]
 }
