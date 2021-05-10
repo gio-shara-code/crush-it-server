@@ -91,3 +91,17 @@ Content-Type: application/json
     //"circuitIds": []
 }
 
+###
+//Done but not tested
+GET http://localhost:3000/exercises HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+
+
+###
+
+POST http://localhost:3000/exercises HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+
+{
+
+}

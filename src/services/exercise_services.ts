@@ -1,24 +1,19 @@
-import {Exercise} from "../interfaces/exercise"
-import {exerciseSchema} from "../models/exercise_model"
-import UserModel from "../models/user_model"
-import * as userServ from "./user_services"
+import {Types} from "mongoose"
 
-// const getExercises = async (userId: string) => {
-//   let userDoc
-//   try {
-//     userDoc = await userServ.getUserById(userId)
-//   } catch (e) {
-//     console.log(`exercise_service [getExercises]: fetching userDoc failed. ${e}`)
-//     return
-//   }
+import ExerciseModel from "../models/exercise_model"
 
-//   if (!userDoc) {
-//     console.log(`exercise_service [getExercises]: user document is undefined.`)
-//     return
-//   }
+const getExercises = async (exerciseIds: Types.ObjectId[]) => {
+  let exerciseDocs
 
-//   return userDoc.exercisesIds
-// }
+  try {
+    exerciseDocs = await ExerciseModel.findById({_id: {$in: exerciseIds}})
+  } catch (e) {
+    console.log(`exercise_services[getExercises]: Fetching exercises failed: ${e}`)
+    return
+  }
+
+  return exerciseDocs
+}
 
 // const addExercise = async (data: { userId: string; exerciseId: Exercise }) => {
 //   let userDoc;
@@ -47,4 +42,4 @@ import * as userServ from "./user_services"
 //   return data.exercise;
 // };
 
-// export {getExercises}
+export {getExercises}
