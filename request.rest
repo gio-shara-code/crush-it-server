@@ -31,3 +31,15 @@ Content-Type: application/json
 //Done
 GET http://localhost:3000/workouts HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+
+###
+//Done
+PATCH http://localhost:3000/workout HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+Content-Type: application/json
+
+{
+    "workoutName": "Yes",
+    "workoutDescription":  "Yes",
+    "workoutId": "6098b906203e3621e565cf3f"
+}

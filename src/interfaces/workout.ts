@@ -1,7 +1,7 @@
 export interface Workout {
   name: string
-  setTotalAmount: number
-  exerciseTotalAmount: number
-  circuitIds: String[]
+  setTotalAmount?: number
+  exerciseTotalAmount?: number
+  circuitIds?: String[]
   description?: string
 }

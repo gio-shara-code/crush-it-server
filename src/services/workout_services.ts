@@ -55,4 +55,28 @@ const getWorkoutsBasedOnIds = async (workoutIds: Types.ObjectId[]) => {
 
   return workoutDocs
 }
-export {getWorkouts, addWorkout, getWorkoutById, getWorkoutsBasedOnIds}
+
+const updateWorkoutNameAndDescription = (input: {
+  name: string
+  description: string
+  _id: string
+}) => {
+  let workoutDoc
+  try {
+    workoutDoc = WorkoutModel.updateOne(
+      {_id: Types.ObjectId(input._id)},
+      {$set: {name: input.name, description: input.description}}
+    )
+  } catch (e) {
+    console.log(`Updating workouts name and description failed. ${e}`)
+    return
+  }
+  return workoutDoc
+}
+export {
+  getWorkouts,
+  addWorkout,
+  getWorkoutById,
+  getWorkoutsBasedOnIds,
+  updateWorkoutNameAndDescription
+}
