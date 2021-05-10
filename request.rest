@@ -98,10 +98,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4Z
 
 
 ###
-
-POST http://localhost:3000/exercises HTTP/1.1
+//Done
+POST http://localhost:3000/exercise HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+Content-Type: application/json
 
 {
-
+    "exerciseName": "Exercise Name",
+    "muscleGroup": "Muscle group"
 }

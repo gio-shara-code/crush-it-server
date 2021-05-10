@@ -1,5 +1,6 @@
 import {Request, Response} from "express"
 import {Types} from "mongoose"
+import ExerciseModel from "../models/exercise_model"
 import * as exerciseServices from "../services/exercise_services"
 import * as userServices from "../services/user_services"
 
@@ -23,7 +24,52 @@ const exercises = async (req: Request, res: Response) => {
   res.json({success: true, exercises: exercises})
 }
 
-export {exercises}
+const addExercise = async (req: Request, res: Response) => {
+  const {exerciseName, muscleGroup} = req.body
+  if (!exerciseName || !muscleGroup) {
+    return res.json({
+      success: false,
+      message: "Provide all fields"
+    })
+  }
+
+  const exerciseDoc = await exerciseServices.saveExercise(
+    new ExerciseModel({
+      name: exerciseName,
+      muscleGroup: muscleGroup
+    })
+  )
+
+  if (!exerciseDoc)
+    return res.json({
+      success: false,
+      message: "Adding exercise failed."
+    })
+
+  //Add exercise id in current user
+  const userDoc = await userServices.getUserById(req.body.userId)
+  if (!userDoc)
+    return res.json({
+      success: false,
+      message: "Adding exercise failed."
+    })
+
+  userDoc.exerciseIds.push(exerciseDoc._id)
+
+  const savedUserDoc = await userServices.saveUser(userDoc)
+  if (!savedUserDoc)
+    return res.json({
+      success: false,
+      message: "Adding exercise failed."
+    })
+
+  res.json({
+    success: true,
+    exercise: exerciseDoc
+  })
+}
+
+export {exercises, addExercise}
 
 // const addExercise = async (req: Request, res: Response) => {
 //   let exercise;

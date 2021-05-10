@@ -1,11 +1,10 @@
-import {model, Schema, Types} from "mongoose"
-import {Circuit} from "../interfaces/circuit"
-import {exerciseSchema} from "./exercise_model"
+import {model, Schema} from "mongoose"
+import {subExerciseSchema} from "./sub_exercise_model"
 
 const circuitSchema = new Schema({
   setAmount: {type: Number, required: true},
   timeBetweenSetsSec: {type: Number, required: true},
-  exercises: {type: [exerciseSchema], required: false}
+  exercises: {type: [subExerciseSchema], required: false}
 })
 
 export default model("Circuit", circuitSchema)

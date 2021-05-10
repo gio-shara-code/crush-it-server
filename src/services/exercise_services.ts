@@ -1,5 +1,5 @@
-import {Types} from "mongoose"
-
+import {Document, Types} from "mongoose"
+import {Exercise} from "../interfaces/exercise"
 import ExerciseModel from "../models/exercise_model"
 
 const getExercises = async (exerciseIds: Types.ObjectId[]) => {
@@ -13,6 +13,16 @@ const getExercises = async (exerciseIds: Types.ObjectId[]) => {
   }
 
   return exerciseDocs
+}
+
+const saveExercise = async (exercise: Exercise & Document) => {
+  let exerciseDoc
+  try {
+    exerciseDoc = await exercise.save()
+  } catch (e) {
+    console.log(`exercise_services[saveExercise]: Saving exercise failed. ${e}`)
+  }
+  return exerciseDoc
 }
 
 // const addExercise = async (data: { userId: string; exerciseId: Exercise }) => {
@@ -42,4 +52,4 @@ const getExercises = async (exerciseIds: Types.ObjectId[]) => {
 //   return data.exercise;
 // };
 
-export {getExercises}
+export {getExercises, saveExercise}

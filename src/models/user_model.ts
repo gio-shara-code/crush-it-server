@@ -1,7 +1,7 @@
 import {model, Schema, Document, Types} from "mongoose"
 import {workoutSchema} from "./workout_model"
 import {User} from "../interfaces/user"
-import {exerciseSchema} from "./exercise_model"
+import {subExerciseSchema} from "./sub_exercise_model"
 //When creating a document
 
 const userSchema = new Schema({

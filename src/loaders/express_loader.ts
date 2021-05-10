@@ -16,6 +16,8 @@ const expressLoader = async (app: Application) => {
 
   app.post("/register", authRoutes.register)
   app.post("/login", authRoutes.login)
+  app.post("/workout", verifyToken, workoutRoutes.addWorkout)
+  app.post("/exercise", verifyToken, exerciseRoutes.addExercise)
 
   app.get("/user", verifyToken, userRoutes.getUser)
   app.get("/workouts", verifyToken, workoutRoutes.workouts)
@@ -23,11 +25,8 @@ const expressLoader = async (app: Application) => {
   app.get("/exercises", verifyToken, exerciseRoutes.exercises)
   // app.get("/exercises", verifyToken, exerciseRoutes.exercises)
 
-  //add workout
-  app.post("/workout", verifyToken, workoutRoutes.addWorkout)
   //update workout
   app.patch("/workout", verifyToken, workoutRoutes.updateWorkout) //patch = update
-
   app.patch("/circuits", verifyToken, circuitsRoutes.updateCircuits)
 
   // app.post("/exercise", verifyToken, exerciseRoutes.addExercise);

@@ -1,17 +1,11 @@
-import mongoose, { Schema, Types } from "mongoose";
-import { Exercise } from "../interfaces/exercise";
+import mongoose, {Schema, Types} from "mongoose"
+import {Exercise} from "../interfaces/exercise"
 
 const exerciseSchema = new Schema({
-  reps_amount: { type: Number, required: false },
-  exercise_time_sec: { type: Number, required: false },
-  exercise_type: { type: String, required: true },
-  name: { type: String, required: true },
-  break_sec: { type: Number, required: true },
-});
+  name: {type: String, required: true},
+  muscleGroup: {type: String, required: true}
+})
 
-export default mongoose.model<Exercise & Types.Subdocument>(
-  "Exercise",
-  exerciseSchema
-);
+export default mongoose.model<Exercise & Types.Subdocument>("Exercise", exerciseSchema)
 
-export { exerciseSchema };
+export {exerciseSchema}

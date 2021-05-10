@@ -1,6 +1,6 @@
-import { Exercise } from "./interfaces/exercise"
+import {SubExercise} from "./interfaces/sub_exercise"
 
-const defaultExercises: Exercise[] = [
+const defaultExercises: SubExercise[] = [
   {
     name: "Burpees",
     break_sec: 10,
@@ -21,4 +21,4 @@ const defaultExercises: Exercise[] = [
   }
 ]
 
-export { defaultExercises }
+export {defaultExercises}
