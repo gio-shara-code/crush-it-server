@@ -4,7 +4,7 @@ import {Workout} from "../interfaces/workout"
 const workoutSchema = new Schema({
   name: {type: String, required: true},
   exerciseTotalAmount: {type: Number, required: true},
-  setTotalAmount: {type: String, required: true},
+  setTotalAmount: {type: Number, required: true},
   description: {type: String, required: false},
   circuitIds: {type: [String], required: false}
 })

@@ -1,5 +1,6 @@
 import CircuitModel from "../models/circuit_model"
 import {Circuit} from "../interfaces/circuit"
+import {Document} from "mongoose"
 
 const getCircuits = async () => {}
 
@@ -14,7 +15,17 @@ const insertManyCircuits = async (circuits: Circuit[]) => {
   return circuitDocs
 }
 
-export {insertManyCircuits, getCircuits}
+const saveCircuit = async (circuit: Circuit & Document) => {
+  let circuitDoc
+  try {
+    circuitDoc = await circuit.save()
+  } catch (e) {
+    console.log(`circuit_sercise[saveCircuit]: Saving circuit failed. ${e}`)
+    return
+  }
+  return circuitDoc
+}
+export {insertManyCircuits, getCircuits, saveCircuit}
 
 // {
 //     "acknowledged" : true,

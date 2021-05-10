@@ -1,4 +1,5 @@
 import {model, Schema, Types} from "mongoose"
+import {Circuit} from "../interfaces/circuit"
 import {exerciseSchema} from "./exercise_model"
 
 const circuitSchema = new Schema({

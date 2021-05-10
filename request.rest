@@ -27,18 +27,6 @@ POST http://localhost:3000/workout HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
 Content-Type: application/json
 
-{
-    "workoutName": "Workout 1",
-    "workoutDescription": "Some description",
-    "circuits": [
-        {
-            "setAmount": 0,
-            "timeBetweenSetsSec": 0,
-            "exercises": []
-        }
-    ]
-}
-
 ###
 //Done
 GET http://localhost:3000/workouts HTTP/1.1
