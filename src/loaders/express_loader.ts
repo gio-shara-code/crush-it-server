@@ -25,6 +25,8 @@ const expressLoader = async (app: Application) => {
   //update workout
   app.patch("/workout", verifyToken, workoutRoutes.updateWorkout) //patch = update
 
+  app.patch("/circuits", verifyToken, circuitsRoutes.updateCircuits)
+
   // app.post("/exercise", verifyToken, exerciseRoutes.addExercise);
 }
 

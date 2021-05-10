@@ -1,6 +1,7 @@
 import {Request, Response} from "express"
 import {Types} from "mongoose"
 import * as circuitServices from "../services/circuit_services"
+import * as workoutServices from "../services/workout_services"
 
 const circuits = async (req: Request, res: Response) => {
   const {circuitIds} = req.body
@@ -24,14 +25,36 @@ const circuits = async (req: Request, res: Response) => {
   })
 }
 
-const updateCircuit = async (req: Request, res: Response) => {
-  const {bulkWrites, circuitIds} = req.body
+const updateCircuits = async (req: Request, res: Response) => {
+  const {bulkWrites, circuitIds, workoutId} = req.body
 
-  if(!bulkWrites) {
+  if (!bulkWrites) {
     return res.json({
-      success: false,
+      success: false
     })
   }
+
+  const result = await circuitServices.bulkWrite(bulkWrites)
+
+  if (!result)
+    return res.json({
+      success: false,
+      message: "Updating circuit failed."
+    })
+
+  if (circuitIds) {
+    const result = await workoutServices.updateWorkoutCircuitIds(circuitIds)
+    if (!result)
+      return res.json({
+        success: false,
+        message: "Updating circuit failed."
+      })
+  }
+
+  res.json({
+    success: true,
+    result: result
+  })
 }
 
-export {circuits}
+export {circuits, updateCircuits}

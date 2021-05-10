@@ -73,10 +73,28 @@ const updateWorkoutNameAndDescription = (input: {
   }
   return workoutDoc
 }
+
+const updateWorkoutCircuitIds = (input: {circuitIds: string[]; workoutId: string}) => {
+  let result
+  try {
+    result = WorkoutModel.updateOne(
+      {_id: input.workoutId},
+      {
+        $set: {circuitIds: input.circuitIds}
+      }
+    )
+  } catch (e) {
+    console.log(`workout_services[updateCircuitIds]: Updating workouts circuit ids failed. ${e}`)
+    return
+  }
+
+  return result
+}
 export {
   getWorkouts,
   addWorkout,
   getWorkoutById,
   getWorkoutsBasedOnIds,
-  updateWorkoutNameAndDescription
+  updateWorkoutNameAndDescription,
+  updateWorkoutCircuitIds
 }

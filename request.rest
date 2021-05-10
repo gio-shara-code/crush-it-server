@@ -57,7 +57,7 @@ Content-Type: application/json
 }
 
 ###
-//
+//Not tested yet
 PATCH http://localhost:3000/circuits HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
 Content-Type: application/json
@@ -88,6 +88,6 @@ Content-Type: application/json
         },
          
     ],
-    "circuitIds": []
+    //"circuitIds": []
 }
 
