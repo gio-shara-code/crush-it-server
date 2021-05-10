@@ -43,3 +43,51 @@ Content-Type: application/json
     "workoutDescription":  "Yes",
     "workoutId": "6098b906203e3621e565cf3f"
 }
+
+###
+//Done
+GET http://localhost:3000/circuits HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+Content-Type: application/json
+
+{
+    "circuitIds": [
+        "6098b906203e3621e565cf3e"
+    ]
+}
+
+###
+//
+PATCH http://localhost:3000/circuits HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+Content-Type: application/json
+
+{
+    "bulkWrites": [
+       { "insertOne":
+
+            {
+               "document" :
+                {   
+                    "circuitIds": [
+                        "6097c4b5c845650c03f66169"
+                    ],
+                    "_id": "6097c4b5c845650c03f6616a",
+                    "description": "New description",
+                    "exerciseTotalAmount": 0,
+                    "setTotalAmount": 0,
+                    "name": "Workout 2",
+                },
+            }
+        },
+        { "updateOne":
+            {
+               "filter" : { "_id" : "" },
+               "update" : { "$set" : { "status" : "Critical Injury" } }
+            }
+        },
+         
+    ],
+    "circuitIds": []
+}
+

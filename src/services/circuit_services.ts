@@ -1,8 +1,17 @@
 import CircuitModel from "../models/circuit_model"
 import {Circuit} from "../interfaces/circuit"
-import {Document} from "mongoose"
+import {Document, Types} from "mongoose"
 
-const getCircuits = async () => {}
+const getCircuits = async (circuitIds: Types.ObjectId[]) => {
+  let circuitDocs
+  try {
+    circuitDocs = await CircuitModel.find({_id: {$in: circuitIds}})
+  } catch (e) {
+    console.log(`Fetching circuits failed. ${e}`)
+    return
+  }
+  return circuitDocs
+}
 
 const insertManyCircuits = async (circuits: Circuit[]) => {
   let circuitDocs

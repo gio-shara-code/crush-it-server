@@ -4,7 +4,7 @@ import cors from "cors"
 import * as authRoutes from "../routes/auth_routes"
 import * as userRoutes from "../routes/user_routes"
 import * as workoutRoutes from "../routes/workout_routes"
-import * as exerciseRoutes from "../routes/exercise_routes"
+import * as circuitsRoutes from "../routes/circuits_routes"
 import {verifyToken} from "../middlewares/verify_token"
 
 // const userService = new UserService();
@@ -15,6 +15,7 @@ const expressLoader = async (app: Application) => {
 
   app.get("/user", verifyToken, userRoutes.getUser)
   app.get("/workouts", verifyToken, workoutRoutes.workouts)
+  app.get("/circuits", verifyToken, circuitsRoutes.circuits)
   // app.get("/exercises", verifyToken, exerciseRoutes.exercises)
 
   app.post("/register", authRoutes.register)
