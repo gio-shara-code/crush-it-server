@@ -26,6 +26,8 @@ const circuits = async (req: Request, res: Response) => {
 }
 
 const updateCircuits = async (req: Request, res: Response) => {
+  //Information about total exercises and sets
+
   const {bulkWrites, circuitIds, workoutId} = req.body
 
   if (!bulkWrites) {
@@ -43,7 +45,7 @@ const updateCircuits = async (req: Request, res: Response) => {
     })
 
   if (circuitIds) {
-    const result = await workoutServices.updateWorkoutCircuitIds(circuitIds)
+    const result = await workoutServices.updateWorkoutCircuitIds({circuitIds, workoutId})
     if (!result)
       return res.json({
         success: false,
