@@ -23,13 +23,10 @@ const expressLoader = async (app: Application) => {
   app.get("/workouts", verifyToken, workoutRoutes.workouts)
   app.get("/circuits", verifyToken, circuitsRoutes.circuits)
   app.get("/exercises", verifyToken, exerciseRoutes.exercises)
-  // app.get("/exercises", verifyToken, exerciseRoutes.exercises)
 
   //update workout
-  app.patch("/workout", verifyToken, workoutRoutes.updateWorkout) //patch = update
+  app.patch("/workout", verifyToken, workoutRoutes.updateWorkout)
   app.patch("/circuits", verifyToken, circuitsRoutes.updateCircuits)
-
-  // app.post("/exercise", verifyToken, exerciseRoutes.addExercise);
 }
 
 export {expressLoader}
