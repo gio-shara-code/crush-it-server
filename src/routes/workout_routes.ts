@@ -2,11 +2,10 @@ import {Request, Response} from "express"
 import * as workoutServices from "../services/workout_services"
 import * as circuitServices from "../services/circuit_services"
 import * as userServices from "../services/user_services"
-import {Circuit} from "../interfaces/circuit"
 import {Types} from "mongoose"
 import CircuitModel from "../models/circuit_model"
 
-const addWorkout = async (req: Request, res: Response) => {
+const addDefaultWorkout = async (req: Request, res: Response) => {
   const circuit = new CircuitModel({setAmount: 0, timeBetweenSetsSec: 0})
   const circuitDoc = await circuitServices.saveCircuit(circuit)
 
@@ -44,7 +43,7 @@ const workouts = async (req: Request, res: Response) => {
   if (!user) {
     return res.json({
       success: false,
-      message: "Fetching a user failed"
+      message: "Fetching workouts failed."
     })
   }
   if (user.workouts.length === 0) {
@@ -94,7 +93,7 @@ const updateWorkout = async (req: Request, res: Response) => {
   })
 }
 
-export {workouts, addWorkout, updateWorkout}
+export {workouts, addDefaultWorkout, updateWorkout}
 
 // const {workoutName, workoutDescription, circuits} = req.body
 // if (!workoutName || !workoutDescription) {

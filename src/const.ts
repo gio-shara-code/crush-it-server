@@ -1,23 +1,33 @@
-import {SubExercise} from "./interfaces/sub_exercise"
+import {Exercise} from "./interfaces/exercise"
 
-const defaultExercises: SubExercise[] = [
+const defaultExercises: Exercise[] = [
   {
     name: "Burpees",
-    break_sec: 10,
-    exercise_type: "time",
-    exercise_time_sec: 20
+    muscleGroup: "test"
   },
   {
-    name: "Push-ups",
-    break_sec: 10,
-    exercise_type: "reps",
-    reps_amount: 20
+    name: "Push-Ups",
+    muscleGroup: "test"
   },
   {
-    name: "Push-ups",
-    break_sec: 10,
-    exercise_type: "reps",
-    reps_amount: 10
+    name: "Pull-Ups",
+    muscleGroup: "test"
+  },
+  {
+    name: "Muscle-Ups",
+    muscleGroup: "test"
+  },
+  {
+    name: "Sit-Ups",
+    muscleGroup: "test"
+  },
+  {
+    name: "Lunges",
+    muscleGroup: "test"
+  },
+  {
+    name: "Squats",
+    muscleGroup: "test"
   }
 ]
 

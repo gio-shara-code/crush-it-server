@@ -3,9 +3,9 @@ import config from "../config/index"
 import jwt from "jsonwebtoken"
 import * as bcrypt from "bcrypt"
 import * as userServices from "../services/user_services"
+import UserModel from "../models/user_model"
 import * as exerciseServices from "../services/exercise_services"
-
-import {defaultExercises} from "../const"
+import {Exercise} from "../interfaces/exercise"
 
 const register = async (req: Request, res: Response) => {
   //retieve email and password
@@ -38,21 +38,30 @@ const register = async (req: Request, res: Response) => {
     })
 
   //Insert many exercises
+  const exercises = await exerciseServices.insertDefaultExercises()
+  if (!exercises) {
+    return res.json({
+      success: false,
+      message: "Creating premade exercises failed."
+    })
+  }
+  const exerciseIds = exercises.map((exercise: any) => exercise._id)
 
   //add user into database
-  //...
-  const doc = await userServices.addUser({
-    email: email,
-    password: hashedPassword,
-    createdOn: Date.now(),
-    name: name,
-    workouts: [],
-    exerciseIds: [],
-    workoutSettings: {
-      soundEnabled: true
-    }
-  })
-  if (!doc) {
+  const userDoc = await userServices.saveUser(
+    new UserModel({
+      email: email,
+      password: hashedPassword,
+      createdOn: Date.now(),
+      name: name,
+      workouts: [],
+      exerciseIds: exerciseIds,
+      workoutSettings: {
+        soundEnabled: true
+      }
+    })
+  )
+  if (!userDoc) {
     return res.json({
       success: false,
       message: "Internal server: Writing user info into database failed"
@@ -61,7 +70,7 @@ const register = async (req: Request, res: Response) => {
 
   //signing token
   try {
-    const token = await jwt.sign({id: doc._id, email: doc.email}, config.jWTSecretKey, {
+    const token = await jwt.sign({id: userDoc._id, email: userDoc.email}, config.jWTSecretKey, {
       algorithm: "HS256"
     })
     res.json({success: true, token: token})

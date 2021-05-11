@@ -1,4 +1,5 @@
 import {Document, Types} from "mongoose"
+import {defaultExercises} from "../const"
 import {Exercise} from "../interfaces/exercise"
 import ExerciseModel from "../models/exercise_model"
 
@@ -6,7 +7,7 @@ const getExercises = async (exerciseIds: Types.ObjectId[]) => {
   let exerciseDocs
 
   try {
-    exerciseDocs = await ExerciseModel.findById({_id: {$in: exerciseIds}})
+    exerciseDocs = await ExerciseModel.find({_id: {$in: exerciseIds}})
   } catch (e) {
     console.log(`exercise_services[getExercises]: Fetching exercises failed: ${e}`)
     return
@@ -25,31 +26,15 @@ const saveExercise = async (exercise: Exercise & Document) => {
   return exerciseDoc
 }
 
-// const addExercise = async (data: { userId: string; exerciseId: Exercise }) => {
-//   let userDoc;
-//   try {
-//     userDoc = await userServ.getUserById(data.userId);
-//   } catch (e) {
-//     console.log(
-//       `exercise_service [addExercise]: fetching userDoc failed. ${e}`
-//     );
-//     return;
-//   }
-//   if (!userDoc) {
-//     console.log(`exercise_service [addExercise]: user document is undefined.`);
-//     return;
-//   }
+const insertDefaultExercises = async () => {
+  let exercises
+  try {
+    exercises = await ExerciseModel.insertMany(defaultExercises)
+  } catch (e) {
+    console.log(`Inserting default exercises failed. ${e}`)
+    return
+  }
+  return exercises
+}
 
-//   userDoc.exercises.push(data.exercise);
-
-//   let doc;
-//   try {
-//     doc = await userDoc.save();
-//   } catch (e) {
-//     console.log(`exercise_service [addExercise]: Saving user failed. ${e}`);
-//     return;
-//   }
-//   return data.exercise;
-// };
-
-export {getExercises, saveExercise}
+export {getExercises, saveExercise, insertDefaultExercises}

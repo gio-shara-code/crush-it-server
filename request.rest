@@ -3,7 +3,7 @@ POST http://localhost:3000/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "gio1234@gmail.com",
+    "email": "giorgi.sharashenidze@code.berlin",
     "password": "shara123",
     "name": "Giorgi Sharashenidze"
 }
@@ -13,29 +13,28 @@ POST http://localhost:3000/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "gio1234@gmail.com",
+    "email": "giorgi.sharashenidze@code.berlin",
     "password": "shara123"
 }
 ###
 //Done
 GET http://localhost:3000/user HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWEwZjQ5Mzg3NTlkNTRiZmQyN2NmYyIsImVtYWlsIjoiZ2lvcmdpLnNoYXJhc2hlbmlkemVAY29kZS5iZXJsaW4iLCJpYXQiOjE2MjA3MDkxOTN9.77edYH_2joDR_TGX_CVoNaRCTKygHQMsLua-0YjgEqk
 ###
 //Done
 POST http://localhost:3000/workout HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWEwZjQ5Mzg3NTlkNTRiZmQyN2NmYyIsImVtYWlsIjoiZ2lvcmdpLnNoYXJhc2hlbmlkemVAY29kZS5iZXJsaW4iLCJpYXQiOjE2MjA3MDkxOTN9.77edYH_2joDR_TGX_CVoNaRCTKygHQMsLua-0YjgEqk
 Content-Type: application/json
 
 ###
 //Done
 GET http://localhost:3000/workouts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWEwZjQ5Mzg3NTlkNTRiZmQyN2NmYyIsImVtYWlsIjoiZ2lvcmdpLnNoYXJhc2hlbmlkemVAY29kZS5iZXJsaW4iLCJpYXQiOjE2MjA3MDkxOTN9.77edYH_2joDR_TGX_CVoNaRCTKygHQMsLua-0YjgEqk
 ###
+
 //Done
 PATCH http://localhost:3000/workout HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWEwZjQ5Mzg3NTlkNTRiZmQyN2NmYyIsImVtYWlsIjoiZ2lvcmdpLnNoYXJhc2hlbmlkemVAY29kZS5iZXJsaW4iLCJpYXQiOjE2MjA3MDkxOTN9.77edYH_2joDR_TGX_CVoNaRCTKygHQMsLua-0YjgEqk
 Content-Type: application/json
 
 {
@@ -45,22 +44,22 @@ Content-Type: application/json
 }
 
 ###
+
 //Done
 GET http://localhost:3000/circuits HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWEwZjQ5Mzg3NTlkNTRiZmQyN2NmYyIsImVtYWlsIjoiZ2lvcmdpLnNoYXJhc2hlbmlkemVAY29kZS5iZXJsaW4iLCJpYXQiOjE2MjA3MDkxOTN9.77edYH_2joDR_TGX_CVoNaRCTKygHQMsLua-0YjgEqk
 Content-Type: application/json
 
 {
     "circuitIds": [
-        "6098b906203e3621e565cf3e"
+        "609a1795acd69358e2ef1ae3"
     ]
 }
 
 ###
 //Not tested yet
 PATCH http://localhost:3000/circuits HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
-Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWEwZjQ5Mzg3NTlkNTRiZmQyN2NmYyIsImVtYWlsIjoiZ2lvcmdpLnNoYXJhc2hlbmlkemVAY29kZS5iZXJsaW4iLCJpYXQiOjE2MjA3MDkxOTN9.77edYH_2joDR_TGX_CVoNaRCTKygHQMsLua-0YjgEqkContent-Type: application/json
 
 {
     "bulkWrites": [
@@ -92,15 +91,14 @@ Content-Type: application/json
 }
 
 ###
-//Done but not tested
+//Done
 GET http://localhost:3000/exercises HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWEwZjQ5Mzg3NTlkNTRiZmQyN2NmYyIsImVtYWlsIjoiZ2lvcmdpLnNoYXJhc2hlbmlkemVAY29kZS5iZXJsaW4iLCJpYXQiOjE2MjA3MDkxOTN9.77edYH_2joDR_TGX_CVoNaRCTKygHQMsLua-0YjgEqk
 
 ###
 //Done
 POST http://localhost:3000/exercise HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTdjMWY4ZmZiY2FkMGE3YjU5OTVhYSIsImVtYWlsIjoiZ2lvMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE2MjA1NTgzMjh9.GOr38qEWAaiOKFHkZz_8DXcEKLnm4TttM4gvzCVpSdo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWEwZjQ5Mzg3NTlkNTRiZmQyN2NmYyIsImVtYWlsIjoiZ2lvcmdpLnNoYXJhc2hlbmlkemVAY29kZS5iZXJsaW4iLCJpYXQiOjE2MjA3MDkxOTN9.77edYH_2joDR_TGX_CVoNaRCTKygHQMsLua-0YjgEqk
 Content-Type: application/json
 
 {

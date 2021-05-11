@@ -1,21 +1,5 @@
 import WorkoutModel, {Workout} from "../models/workout_model"
 import {Types} from "mongoose"
-import * as userServ from "./user_services"
-const getWorkouts = async (userId: string) => {
-  let userDoc
-  try {
-    userDoc = await userServ.getUserById(userId)
-  } catch (e) {
-    console.log(`wokout_services [getWorkouts]: fetching userDoc failed: ${e}`)
-    return
-  }
-
-  if (!userDoc) {
-    console.log(`wokout_services [getWorkouts]: user document is undefined.`)
-    return
-  }
-  return userDoc.workouts
-}
 
 const addWorkout = async (workout: Workout) => {
   const workoutModel = new WorkoutModel(workout)
@@ -91,7 +75,6 @@ const updateWorkoutCircuitIds = (input: {circuitIds: string[]; workoutId: string
   return result
 }
 export {
-  getWorkouts,
   addWorkout,
   getWorkoutById,
   getWorkoutsBasedOnIds,

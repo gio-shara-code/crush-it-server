@@ -105,3 +105,4 @@ dist
 
 #My code
 dist/
+mongoose_test.ts

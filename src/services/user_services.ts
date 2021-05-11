@@ -2,17 +2,6 @@ import UserModel from "../models/user_model"
 import {Types, Document} from "mongoose"
 import {User} from "../interfaces/user"
 
-const addUser = async (user: User) => {
-  const usr = new UserModel(user)
-  try {
-    const doc = await usr.save()
-    return doc
-  } catch (e) {
-    console.log(`UserService[addUser] failed: ${e}`)
-    return
-  }
-}
-
 const getUserById = async (id: string) => {
   try {
     const docs = await UserModel.find({
@@ -62,4 +51,4 @@ const saveUser = async (user: User & Document) => {
   return userDoc
 }
 
-export {addUser, getUserById, checkUserExistencyByEmail, getUserByEmail, saveUser}
+export {getUserById, checkUserExistencyByEmail, getUserByEmail, saveUser}

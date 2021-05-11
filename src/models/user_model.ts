@@ -5,7 +5,7 @@ import {subExerciseSchema} from "./sub_exercise_model"
 //When creating a document
 
 const userSchema = new Schema({
-  email: {type: String, required: true},
+  email: {type: String, required: true, unique: true},
   name: {type: String, required: true},
   password: {type: String, required: true, select: false},
   createdOn: {type: Number, required: true},
@@ -13,7 +13,7 @@ const userSchema = new Schema({
   workouts: {type: [String], required: false},
   workoutSettings: {
     soundEnabled: {
-      type: String,
+      type: Boolean,
       required: true
     }
   }

@@ -8,13 +8,14 @@ const exercises = async (req: Request, res: Response) => {
   const userDoc = await userServices.getUserById(req.body.userId)
   if (!userDoc) return res.json({success: false, message: "Fetching exercises failed."})
 
-  if (userDoc.exerciseIds.length === 0) {
+  if (userDoc.exerciseIds.length === 0 || !userDoc.exerciseIds[0]) {
     return res.json({
       success: true,
       exercises: []
     })
   }
-  const userObjectIds = userDoc.exerciseIds.map((exerciseId: any) =>
+
+  const userObjectIds: Types.ObjectId[] = userDoc.exerciseIds.map((exerciseId: String) =>
     Types.ObjectId(`${exerciseId}`)
   )
 
