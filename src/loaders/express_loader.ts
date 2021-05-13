@@ -8,6 +8,7 @@ import * as circuitsRoutes from "../routes/circuit_routes"
 import * as exerciseRoutes from "../routes/exercise_routes"
 import {verifyToken} from "../middlewares/verify_token"
 
+
 // const userService = new UserService();
 const expressLoader = async (app: Application) => {
   app.use(json())
@@ -27,6 +28,7 @@ const expressLoader = async (app: Application) => {
   //update workout
   app.patch("/workout", verifyToken, workoutRoutes.updateWorkout)
   app.patch("/circuits", verifyToken, circuitsRoutes.updateCircuits)
+  return app
 }
 
 export {expressLoader}

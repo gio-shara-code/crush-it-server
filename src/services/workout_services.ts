@@ -17,11 +17,11 @@ const addWorkout = async (workout: Workout) => {
 const getWorkoutById = async (workoutId: string) => {
   let workout
   try {
-    workout = await WorkoutModel.find({
+    workout = await WorkoutModel.findOne({
       _id: new Types.ObjectId(workoutId)
     })
   } catch (e) {
-    console.log(`Couldn't find workout by id. ${e}`)
+    console.log(`workout_services[getWorkoutById]: Couldn't find workout by id. ${e}`)
     return
   }
 
@@ -40,14 +40,14 @@ const getWorkoutsBasedOnIds = async (workoutIds: Types.ObjectId[]) => {
   return workoutDocs
 }
 
-const updateWorkoutNameAndDescription = (input: {
+const updateWorkoutNameAndDescription = async (input: {
   name: string
   description: string
   _id: string
 }) => {
   let workoutDoc
   try {
-    workoutDoc = WorkoutModel.updateOne(
+    workoutDoc = await WorkoutModel.updateOne(
       {_id: Types.ObjectId(input._id)},
       {$set: {name: input.name, description: input.description}}
     )
@@ -74,6 +74,7 @@ const updateWorkoutCircuitIds = (input: {circuitIds: string[]; workoutId: string
 
   return result
 }
+
 export {
   addWorkout,
   getWorkoutById,

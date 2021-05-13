@@ -5,14 +5,13 @@ import * as bcrypt from "bcrypt"
 import * as userServices from "../services/user_services"
 import UserModel from "../models/user_model"
 import * as exerciseServices from "../services/exercise_services"
-import {Exercise} from "../interfaces/exercise"
 
 const register = async (req: Request, res: Response) => {
   //retieve email and password
   const {email, password, name} = req.body
   //check if email and password exist in the body
   if (!email || !password || !name) {
-    return res.json({
+    return res.status(422).json({
       success: false,
       message: "Please provide neccessary fields for the registration!"
     })
@@ -30,11 +29,11 @@ const register = async (req: Request, res: Response) => {
   }
 
   //check if the email already exists
-  const userExists = await userServices.checkUserExistencyByEmail(email)
-  if (userExists)
-    return res.json({
+  const existingUser = await userServices.getUserByEmail(email)
+  if (existingUser)
+    return res.status(409).json({
       success: false,
-      message: `User with the email ${email} exists alreaady`
+      message: `User with the email ${email} exists already`
     })
 
   //Insert many exercises
@@ -61,6 +60,7 @@ const register = async (req: Request, res: Response) => {
       }
     })
   )
+
   if (!userDoc) {
     return res.json({
       success: false,
@@ -69,51 +69,57 @@ const register = async (req: Request, res: Response) => {
   }
 
   //signing token
+  let token
   try {
-    const token = await jwt.sign({id: userDoc._id, email: userDoc.email}, config.jWTSecretKey, {
+    token = await jwt.sign({id: userDoc._id, email: userDoc.email}, config.jWTSecretKey, {
       algorithm: "HS256"
     })
-    res.json({success: true, token: token})
   } catch {
-    res.json({
+    return res.json({
       message: "Internal server: signing jwt failed!",
       success: false
     })
   }
+  res.status(200).json({success: true, token: token})
 }
 
 const login = async (req: Request, res: Response) => {
   const {email, password} = req.body
   if (!email || !password) {
-    return res.json({
+    return res.status(422).json({
       success: false,
       message: "Email or/and password is missing!"
     })
   }
+
   //get user from database
   const doc = await userServices.getUserByEmail(email)
   if (!doc) {
-    return res.json({
+    return res.status(404).json({
       success: false,
       message: `Your email ${email} doesn't exist`
     })
   }
 
   //Check if the password is correct
-  if (doc.password === undefined) return
+  if (doc.password === undefined)
+    return res.status(500).json({
+      success: false,
+      message: `Internal Server Error: Please contact the administration.`
+    })
 
   let correctPassword
   try {
     correctPassword = await bcrypt.compare(password, doc.password)
   } catch {
-    return res.json({
+    return res.status(403).json({
       success: false,
-      message: "Internal server: comparing password doesn't work."
+      message: "Internal server: comparing password failed."
     })
   }
 
   if (!correctPassword)
-    return res.json({
+    return res.status(403).json({
       success: false,
       message: "Password is wrong!"
     })
@@ -125,12 +131,12 @@ const login = async (req: Request, res: Response) => {
       algorithm: "HS256"
     })
   } catch (e) {
-    return res.json({
-      message: "auth_routes [login]: Token generation failed!",
+    return res.status(500).json({
+      message: "Internal Server Error: Token generation failed!",
       success: false
     })
   }
-  res.json({success: true, token: token})
+  res.status(200).json({success: true, token: token})
 }
 
 export {register, login}

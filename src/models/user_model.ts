@@ -1,7 +1,5 @@
-import {model, Schema, Document, Types} from "mongoose"
-import {workoutSchema} from "./workout_model"
+import {model, Schema, Document} from "mongoose"
 import {User} from "../interfaces/user"
-import {subExerciseSchema} from "./sub_exercise_model"
 //When creating a document
 
 const userSchema = new Schema({
@@ -10,7 +8,7 @@ const userSchema = new Schema({
   password: {type: String, required: true, select: false},
   createdOn: {type: Number, required: true},
   exerciseIds: {type: [String], required: true},
-  workouts: {type: [String], required: false},
+  workoutIds: {type: [String], required: false},
   workoutSettings: {
     soundEnabled: {
       type: Boolean,

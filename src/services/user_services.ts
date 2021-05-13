@@ -16,28 +16,16 @@ const getUserById = async (id: string) => {
 }
 
 const getUserByEmail = async (email: string) => {
+  let doc
   try {
-    const docs = await UserModel.find({
+    doc = await UserModel.findOne({
       email: email
     })
-    if (docs.length === 0) return
-    return docs[0]
   } catch (e) {
     console.log(`UserService[getUserByEmail]: fetching user by email failed. ${e}`)
     return
   }
-}
-
-const checkUserExistencyByEmail = async (email: string): Promise<boolean> => {
-  try {
-    const docs = await UserModel.find({email: email})
-    if (docs.length !== 0) return true
-  } catch (e) {
-    console.log(`UserService[checkUserExistency] failed: ${e}`)
-    return true
-  }
-
-  return false
+  return doc
 }
 
 const saveUser = async (user: User & Document) => {
@@ -51,4 +39,4 @@ const saveUser = async (user: User & Document) => {
   return userDoc
 }
 
-export {getUserById, checkUserExistencyByEmail, getUserByEmail, saveUser}
+export {getUserById, getUserByEmail, saveUser}

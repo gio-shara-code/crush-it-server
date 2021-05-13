@@ -10,6 +10,9 @@ const startServer = async () => {
   app.listen(config.port, () => {
     console.log(`The server is running on the port ${config.port}`)
   })
+  return app
 }
 
 startServer()
+
+export {startServer}

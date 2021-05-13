@@ -1,26 +1,27 @@
-import { Request, Response } from "express";
-import config from "../config/index";
-import jwt from "jsonwebtoken";
+import {Request, Response} from "express"
+import config from "../config/index"
+import jwt from "jsonwebtoken"
 
 const verifyToken = async (req: Request, res: Response, next: any) => {
-  const token = req.header("authorization")?.split(" ")[1];
+  const token = req.header("authorization")?.split(" ")[1]
 
   if (!token)
-    return res.json({
-      message: "token not found",
-      success: false,
-    });
-
+    return res.status(422).json({
+      message: "Token not found",
+      success: false
+    })
+  let payload: any
   try {
-    const payload: any = await jwt.verify(token, config.jWTSecretKey);
-    req.body.userId = payload.id;
-    next();
+    payload = await jwt.verify(token, config.jWTSecretKey)
   } catch {
-    return res.json({
+    return res.status(401).json({
       message: "Token is invalid.",
-      success: false,
-    });
+      success: false
+    })
   }
-};
 
-export { verifyToken };
+  req.body.userId = payload.id
+  next()
+}
+
+export {verifyToken}
