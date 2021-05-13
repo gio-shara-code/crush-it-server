@@ -1,5 +1,5 @@
 import request, {Response} from "supertest"
-import express, {response} from "express"
+import express from "express"
 import {expressLoader} from "../../loaders/express_loader"
 import {mongooseTestLoader} from "../../loaders/mongoose_loader"
 import * as userServices from "../../services/user_services"

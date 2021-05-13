@@ -5,12 +5,11 @@ import * as circuitServices from "../../services/circuit_services"
 import {mongooseTestLoader} from "../../loaders/mongoose_loader"
 import express from "express"
 import request from "supertest"
-import jwt from "jsonwebtoken"
 import {Types, Document} from "mongoose"
 import {Circuit} from "../../interfaces/circuit"
 import {Workout} from "../../interfaces/workout"
 import {User} from "../../interfaces/user"
-
+import * as mocks from "../mocks"
 let app: any
 let connection: any
 
@@ -23,10 +22,7 @@ afterAll(async () => {
   await connection.disconnect()
 })
 
-const mockVerifyToken = () =>
-  jest.spyOn(jwt, "verify").mockImplementationOnce(() => {
-    return {id: "user_id"}
-  })
+
 
 describe("Workout Routes", () => {
   describe("GET /workouts", () => {
@@ -49,7 +45,7 @@ describe("Workout Routes", () => {
 
     it("Fetching Empty workout list", async (done) => {
       //mock verify jwt function
-      mockVerifyToken()
+      mocks.verifyToken()
       jest.spyOn(userServices, "getUserById").mockImplementationOnce((id: string) => {
         return {workouts: []} as any
       })
@@ -64,7 +60,7 @@ describe("Workout Routes", () => {
     })
 
     it("Fetching workouts successfully", async (done) => {
-      mockVerifyToken()
+      mocks.verifyToken()
 
       const workoutSampleData = [
         {
@@ -103,7 +99,7 @@ describe("Workout Routes", () => {
   describe("POST /workout", () => {
     const uri = "/workout"
     it("Adding default workout successfully", async (done) => {
-      mockVerifyToken()
+      mocks.verifyToken()
       jest
         .spyOn(circuitServices, "saveCircuit")
         .mockImplementationOnce(async (circuit: Circuit & Document) => {
@@ -134,7 +130,7 @@ describe("Workout Routes", () => {
     const uri = "/workout"
 
     it("Missing required parameters", async (done) => {
-      mockVerifyToken()
+      mocks.verifyToken()
       const response = await request(app).post(uri)
 
       expect(response.body.success).toBeFalsy()
@@ -143,7 +139,7 @@ describe("Workout Routes", () => {
     })
 
     it.only("Updating Workout Successfully", async (done) => {
-      mockVerifyToken()
+      mocks.verifyToken()
       const workoutData = {
         workoutName: "Workout Name",
         workoutDescription: "Desc",
