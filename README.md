@@ -33,7 +33,7 @@ You can check out other dependencies in the **package.json** file under the prop
 
 - **Why MongoDB?** Particularly I want to get familiar with the NoSQL database because I am planning to work on large projects in the future. I read that MongoDB is popular and therefore I thought it is a good fit for our project. But of course, I am aware of the advantages and disadvantages of both SQL and NoSQL databases. It's just because I had to choose between one of the databases so I went for NoSQL.
 
-- **Why Typescript?** We using typescript to avoid searching bugs in javascript. Because of its types, the development is going much faster in comparison to javascript.
+- **Why Typescript?** We using typescript to avoid searching bugs, as it is well-known using javascript. Because of its types, the development is going much faster.
 
 ## Setup
 
