@@ -35,10 +35,10 @@ const saveCircuit = async (circuit: Circuit & Document) => {
   return circuitDoc
 }
 
-const bulkWrite = async (bulkWrites: any) => {
+const bulkWrite = async (bulkWrites: any[]) => {
   let result
   try {
-    result = CircuitModel.bulkWrite(bulkWrites)
+    result = await CircuitModel.bulkWrite(bulkWrites)
   } catch (e) {
     console.log(`circuit_services[bulkWrite]: bulk write on circuits failed. ${e}`)
     return
