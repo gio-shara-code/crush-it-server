@@ -1,8 +1,8 @@
 import {Request, Response} from "express"
 import {Types} from "mongoose"
 import ExerciseModel from "../models/exercise_model"
-import * as exerciseServices from "../services/exercise_services"
-import * as userServices from "../services/user_services"
+import * as exerciseServices from "../services/db/exercise_services"
+import * as userServices from "../services/db/user_services"
 
 const exercises = async (req: Request, res: Response) => {
   const userDoc = await userServices.getUserById(req.body.userId)

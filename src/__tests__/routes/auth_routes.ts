@@ -12,7 +12,7 @@ let connection: any
 beforeAll(async () => {
   connection = await mongooseTestLoader()
   app = await expressLoader(express())
-})
+}) 
 
 afterAll(async () => {
   await connection.disconnect()

@@ -1,5 +1,5 @@
 import {Request, Response} from "express"
-import * as userServices from "../services/user_services"
+import * as userServices from "../services/db/user_services"
 
 const getUser = async (req: Request, res: Response) => {
   console.log(req.body.userId)
