@@ -7,5 +7,6 @@ export interface User {
     soundEnabled: boolean
   }
   workouts: String[]
-  password?: string
+  password?: string,
+  _id?: string,
 }

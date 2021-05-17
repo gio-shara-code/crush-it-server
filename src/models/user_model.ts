@@ -5,7 +5,7 @@ import {User} from "../interfaces/user"
 const userSchema = new Schema({
   email: {type: String, required: true, unique: true},
   name: {type: String, required: true},
-  password: {type: String, required: true, select: false},
+  password: {type: String, required: true},
   createdOn: {type: Number, required: true},
   exerciseIds: {type: [String], required: true},
   workoutIds: {type: [String], required: false},

@@ -6,14 +6,12 @@ import * as userServices from "../services/db/user_services"
 import UserModel from "../models/user_model"
 import * as exerciseServices from "../services/db/exercise_services"
 import {defaultExercises} from "../const"
-import {hashPassword} from "../services/bcrypt"
+import {hashPassword, comparePassword} from "../services/bcrypt"
 import {signToken} from "../services/jwt"
+import {User} from "../interfaces/user"
 
 const register = async (req: Request, res: Response) => {
-  //retieve email and password
   const {email, password, name} = req.body
-
-  //check if email and password exist in the body
 
   if (!email || !password || !name)
     return res.status(422).json({
@@ -43,8 +41,6 @@ const register = async (req: Request, res: Response) => {
       message: "Internal Server Error: Registering user failed."
     })
 
-  const exerciseIds = exercises.map((exercise: any) => exercise._id)
-
   const userDoc = await userServices.saveUser(
     new UserModel({
       email: email,
@@ -52,7 +48,7 @@ const register = async (req: Request, res: Response) => {
       createdOn: Date.now(),
       name: name,
       workouts: [],
-      exerciseIds: exerciseIds,
+      exerciseIds: exercises.map((exercise: any) => exercise._id),
       workoutSettings: {
         soundEnabled: true
       }
@@ -77,57 +73,36 @@ const register = async (req: Request, res: Response) => {
 
 const login = async (req: Request, res: Response) => {
   const {email, password} = req.body
-  if (!email || !password) {
+  if (!email || !password)
     return res.status(422).json({
       success: false,
       message: "Email or/and password is missing!"
     })
-  }
 
-  //get user from database
-  const doc = await userServices.getUserByEmail(email)
-  if (!doc) {
+  const user = (await userServices.getUserByEmail(email)) as User
+  if (!user)
     return res.status(404).json({
       success: false,
-      message: `Your email ${email} doesn't exist`
-    })
-  }
-
-  //Check if the password is correct
-  if (doc.password === undefined)
-    return res.status(500).json({
-      success: false,
-      message: `Internal Server Error: Please contact the administration.`
+      message: `A user with the email ${email} doesn't exist.`
     })
 
-  let correctPassword
-  try {
-    correctPassword = await bcrypt.compare(password, doc.password)
-  } catch {
+  const result = await comparePassword({
+    currentPassword: password,
+    correctPassword: user.password as string
+  })
+
+  if (!result)
     return res.status(403).json({
       success: false,
-      message: "Internal server: comparing password failed."
-    })
-  }
-
-  if (!correctPassword)
-    return res.status(403).json({
-      success: false,
-      message: "Password is wrong!"
+      message: "Password is incorrect, please try again."
     })
 
-  //generate token using jwt
-  let token
-  try {
-    token = await jwt.sign({id: doc._id, email: doc.email}, config.jWTSecretKey, {
-      algorithm: "HS256"
-    })
-  } catch (e) {
+  const token = await signToken({_id: user._id as string, email: user.email})
+  if (!token)
     return res.status(500).json({
       message: "Internal Server Error: Token generation failed!",
       success: false
     })
-  }
   res.status(200).json({success: true, token: token})
 }
 
