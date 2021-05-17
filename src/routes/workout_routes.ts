@@ -1,6 +1,6 @@
 import {Request, Response} from "express"
 import * as workoutServices from "../services/workout_services"
-import * as circuitServices from "../services/circuit_services"
+import * as circuitServices from "../services/db/circuit_services"
 import * as userServices from "../services/user_services"
 import {Types} from "mongoose"
 import CircuitModel from "../models/circuit_model"

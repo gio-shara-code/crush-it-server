@@ -1,8 +1,6 @@
 import {Workout} from "../../interfaces/workout"
-import * as workoutServices from "../../services/workout_services"
+import * as workoutServices from "../../services/db/workout_services"
 import {mongooseTestLoader} from "../../loaders/mongoose_loader"
-import WorkoutModel from "../../models/workout_model"
-import {Types} from "mongoose"
 
 let connection: any
 
@@ -14,7 +12,7 @@ afterAll(async () => {
   await connection.disconnect()
 })
 
-describe.only("Workout Services", () => {
+describe("Workout Services", () => {
   let workoutDoc: any
   const newWorkout: Workout = {
     name: "Workout Name",

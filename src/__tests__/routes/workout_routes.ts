@@ -1,7 +1,7 @@
 import {expressLoader} from "../../loaders/express_loader"
 import * as workoutServices from "../../services/workout_services"
 import * as userServices from "../../services/user_services"
-import * as circuitServices from "../../services/circuit_services"
+import * as circuitServices from "../../services/db/circuit_services"
 import {mongooseTestLoader} from "../../loaders/mongoose_loader"
 import express from "express"
 import request from "supertest"
@@ -22,7 +22,10 @@ afterAll(async () => {
   await connection.disconnect()
 })
 
-
+afterEach(() => {
+  jest.resetAllMocks() //resets usage data but not implementation
+  jest.restoreAllMocks() //resets everything, which includes usage data, implementation and mock name.
+})
 
 describe("Workout Routes", () => {
   describe("GET /workouts", () => {
@@ -44,7 +47,6 @@ describe("Workout Routes", () => {
     })
 
     it("Fetching Empty workout list", async (done) => {
-      //mock verify jwt function
       mocks.verifyToken()
       jest.spyOn(userServices, "getUserById").mockImplementationOnce((id: string) => {
         return {workouts: []} as any
@@ -138,7 +140,7 @@ describe("Workout Routes", () => {
       done()
     })
 
-    it.only("Updating Workout Successfully", async (done) => {
+    it("Updating Workout Successfully", async (done) => {
       mocks.verifyToken()
       const workoutData = {
         workoutName: "Workout Name",

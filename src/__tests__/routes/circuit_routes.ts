@@ -1,4 +1,4 @@
-import * as circuitServices from "../../services/circuit_services"
+import * as circuitServices from "../../services/db/circuit_services"
 import * as workoutServices from "../../services/workout_services"
 import express from "express"
 import request, {Response} from "supertest"
@@ -18,7 +18,10 @@ beforeAll(async () => {
 afterAll(async () => {
   await connection.disconnect()
 })
-
+afterEach(() => {
+  jest.resetAllMocks() //resets usage data but not implementation
+  jest.restoreAllMocks() //resets everything, which includes usage data, implementation and mock name.
+})
 describe("Circuit Routes", () => {
   const path = "/circuits"
   const circuitData = {

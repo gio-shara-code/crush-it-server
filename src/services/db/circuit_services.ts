@@ -1,5 +1,5 @@
-import CircuitModel from "../models/circuit_model"
-import {Circuit} from "../interfaces/circuit"
+import CircuitModel from "../../models/circuit_model"
+import {Circuit} from "../../interfaces/circuit"
 import {Document, Types} from "mongoose"
 
 const getCircuits = async (circuitIds: Types.ObjectId[]) => {

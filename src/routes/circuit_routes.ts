@@ -1,6 +1,6 @@
 import {Request, Response} from "express"
 import {Types} from "mongoose"
-import * as circuitServices from "../services/circuit_services"
+import * as circuitServices from "../services/db/circuit_services"
 import * as workoutServices from "../services/workout_services"
 
 const circuits = async (req: Request, res: Response) => {

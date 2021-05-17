@@ -2,8 +2,8 @@ import request, {Response} from "supertest"
 import express from "express"
 import {expressLoader} from "../../loaders/express_loader"
 import {mongooseTestLoader} from "../../loaders/mongoose_loader"
-import * as userServices from "../../services/user_services"
-import * as exerciseServices from "../../services/exercise_services"
+import * as userServices from "../../services/db/user_services"
+import * as exerciseServices from "../../services/db/exercise_services"
 import * as bcrypt from "bcrypt"
 
 let app: any
@@ -16,6 +16,10 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await connection.disconnect()
+})
+afterEach(() => {
+  jest.resetAllMocks() //resets usage data but not implementation
+  jest.restoreAllMocks() //resets everything, which includes usage data, implementation and mock name.
 })
 
 describe("Auth Routes", () => {

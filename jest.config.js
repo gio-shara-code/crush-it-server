@@ -5,5 +5,7 @@ module.exports = {
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
   testEnvironment: "node",
-  testTimeout: 30000
+  testTimeout: 30000,
+  modulePathIgnorePatterns: ["__tests__/mocks"]
+  // globalSetup: "__tests__/setup.ts"
 }

@@ -1,4 +1,4 @@
-import WorkoutModel, {Workout} from "../models/workout_model"
+import WorkoutModel, {Workout} from "../../models/workout_model"
 import {Types} from "mongoose"
 
 const addWorkout = async (workout: Workout) => {

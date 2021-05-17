@@ -1,6 +1,6 @@
 import {Circuit} from "../../interfaces/circuit"
 import {mongooseTestLoader} from "../../loaders/mongoose_loader"
-import * as circuitServices from "../../services/circuit_services"
+import * as circuitServices from "../../services/db/circuit_services"
 import {Types} from "mongoose"
 import CircuitModel from "../../models/circuit_model"
 

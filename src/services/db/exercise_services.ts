@@ -1,7 +1,7 @@
 import {Document, Types} from "mongoose"
-import {defaultExercises} from "../const"
-import {Exercise} from "../interfaces/exercise"
-import ExerciseModel from "../models/exercise_model"
+import {defaultExercises} from "../../const"
+import {Exercise} from "../../interfaces/exercise"
+import ExerciseModel from "../../models/exercise_model"
 
 const getExercises = async (exerciseIds: Types.ObjectId[]) => {
   let exerciseDocs
@@ -26,15 +26,15 @@ const saveExercise = async (exercise: Exercise & Document) => {
   return exerciseDoc
 }
 
-const insertDefaultExercises = async () => {
-  let exercises
+const insertDefaultExercises = async (exercises: Exercise[]) => {
+  let result
   try {
-    exercises = await ExerciseModel.insertMany(defaultExercises)
+    result = await ExerciseModel.insertMany(exercises)
   } catch (e) {
     console.log(`Inserting default exercises failed. ${e}`)
     return
   }
-  return exercises
+  return result
 }
 
 export {getExercises, saveExercise, insertDefaultExercises}

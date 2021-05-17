@@ -1,6 +1,6 @@
-import UserModel from "../models/user_model"
+import UserModel from "../../models/user_model"
 import {Types, Document} from "mongoose"
-import {User} from "../interfaces/user"
+import {User} from "../../interfaces/user"
 
 const getUserById = async (id: string) => {
   try {

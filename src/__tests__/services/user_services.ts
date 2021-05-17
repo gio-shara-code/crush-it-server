@@ -1,5 +1,5 @@
 import {mongooseTestLoader} from "../../loaders/mongoose_loader"
-import * as userServices from "../../services/user_services"
+import * as userServices from "../../services/db/user_services"
 import UserModel from "../../models/user_model"
 
 let connection: any

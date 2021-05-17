@@ -2,14 +2,18 @@ import {Request, Response} from "express"
 import config from "../config/index"
 import jwt from "jsonwebtoken"
 import * as bcrypt from "bcrypt"
-import * as userServices from "../services/user_services"
+import * as userServices from "../services/db/user_services"
 import UserModel from "../models/user_model"
-import * as exerciseServices from "../services/exercise_services"
+import * as exerciseServices from "../services/db/exercise_services"
+import {defaultExercises} from "../const"
+import {hashPassword} from "../services/bcrypt"
 
 const register = async (req: Request, res: Response) => {
   //retieve email and password
   const {email, password, name} = req.body
+
   //check if email and password exist in the body
+
   if (!email || !password || !name) {
     return res.status(422).json({
       success: false,
@@ -17,11 +21,8 @@ const register = async (req: Request, res: Response) => {
     })
   }
 
-  //hash password
-  let hashedPassword
-  try {
-    hashedPassword = await bcrypt.hash(password, 10)
-  } catch {
+  const hashedPassword = await hashPassword(password)
+  if (!hashedPassword) {
     return res.json({
       success: false,
       message: "Internal server error: hashing password failed"
@@ -37,13 +38,13 @@ const register = async (req: Request, res: Response) => {
     })
 
   //Insert many exercises
-  const exercises = await exerciseServices.insertDefaultExercises()
-  if (!exercises) {
+  const exercises = await exerciseServices.insertDefaultExercises(defaultExercises)
+  if (!exercises)
     return res.json({
       success: false,
       message: "Creating premade exercises failed."
     })
-  }
+
   const exerciseIds = exercises.map((exercise: any) => exercise._id)
 
   //add user into database
@@ -61,12 +62,11 @@ const register = async (req: Request, res: Response) => {
     })
   )
 
-  if (!userDoc) {
+  if (!userDoc)
     return res.json({
       success: false,
       message: "Internal server: Writing user info into database failed"
     })
-  }
 
   //signing token
   let token
