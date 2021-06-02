@@ -3,12 +3,13 @@ import {Types} from "mongoose"
 import ExerciseModel from "../models/exercise_model"
 import * as exerciseServices from "../services/db/exercise_services"
 import * as userServices from "../services/db/user_services"
+import {isExercisesEmpty} from "../utils/validation"
 
 const exercises = async (req: Request, res: Response) => {
   const userDoc = await userServices.getUserById(req.body.userId)
   if (!userDoc) return res.json({success: false, message: "Fetching exercises failed."})
 
-  if (userDoc.exerciseIds.length === 0 || !userDoc.exerciseIds[0]) {
+  if (isExercisesEmpty(userDoc.exerciseIds)) {
     return res.json({
       success: true,
       exercises: []
@@ -41,13 +42,22 @@ const addExercise = async (req: Request, res: Response) => {
     })
   )
 
-  if (!exerciseDoc)
+  if (!exerciseDoc) {
     return res.json({
       success: false,
       message: "Adding exercise failed."
     })
+  }
 
-  //Add exercise id in current user
+  // try {
+  //   //CAll 1
+
+  //   //CAll 2
+  //   throw Error("dsagfdsag")
+  // } catch (e) {
+
+  // }
+
   const userDoc = await userServices.getUserById(req.body.userId)
   if (!userDoc)
     return res.json({

@@ -30,15 +30,13 @@ const updateCircuits = async (req: Request, res: Response) => {
 
   const {bulkWrites, circuitIds, workoutId} = req.body
 
-  if (!bulkWrites) {
+  if (!bulkWrites)
     return res.status(422).json({
       success: false,
       message: "Operation for bulk writes missing!"
     })
-  }
 
   const result = await circuitServices.bulkWrite(bulkWrites)
-
   if (!result)
     return res.status(500).json({
       success: false,

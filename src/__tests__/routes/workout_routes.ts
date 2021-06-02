@@ -1,17 +1,18 @@
 import {expressLoader} from "../../loaders/express_loader"
-import * as workoutServices from "../../services/workout_services"
-import * as userServices from "../../services/user_services"
+import * as workoutServices from "../../services/db/workout_services"
+import * as userServices from "../../services/db/user_services"
 import * as circuitServices from "../../services/db/circuit_services"
 import {mongooseTestLoader} from "../../loaders/mongoose_loader"
 import express from "express"
 import request from "supertest"
-import {Types, Document} from "mongoose"
+import {Types, Document, Connection} from "mongoose"
 import {Circuit} from "../../interfaces/circuit"
 import {Workout} from "../../interfaces/workout"
 import {User} from "../../interfaces/user"
 import * as mocks from "../mocks"
+
 let app: any
-let connection: any
+let connection: Connection
 
 beforeAll(async () => {
   connection = await mongooseTestLoader()
@@ -19,10 +20,10 @@ beforeAll(async () => {
 })
 
 afterAll(async () => {
-  await connection.disconnect()
+  await (connection as any).disconnect()
 })
 
-afterEach(() => {
+afterEach(async () => {
   jest.resetAllMocks() //resets usage data but not implementation
   jest.restoreAllMocks() //resets everything, which includes usage data, implementation and mock name.
 })

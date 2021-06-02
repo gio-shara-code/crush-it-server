@@ -1,5 +1,5 @@
 import * as circuitServices from "../../services/db/circuit_services"
-import * as workoutServices from "../../services/workout_services"
+import * as workoutServices from "../../services/db/workout_services"
 import express from "express"
 import request, {Response} from "supertest"
 import {expressLoader} from "../../loaders/express_loader"

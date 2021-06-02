@@ -1,4 +1,4 @@
-import {Types} from "mongoose"
+import mongoose from "mongoose"
 import {mongooseTestLoader} from "../../loaders/mongoose_loader"
 import * as exerciseServices from "../../services/db/exercise_services"
 import ExerciseModel from "../../models/exercise_model"
@@ -15,15 +15,19 @@ afterAll(async () => {
   await connection.disconnect()
 })
 
+afterEach(async () => {
+  await mongoose.connection.db.dropCollection("exercises")
+})
+
 describe("Exercise Services", () => {
+  
   const exerciseData: Exercise = {
     name: `Random Name: ${uuidv4()}`,
     muscleGroup: "Muscle Group"
   }
 
-  let createdExercise: Exercise
   it("Saving an exercise successfully", async () => {
-    createdExercise = (await exerciseServices.saveExercise(
+    const createdExercise = (await exerciseServices.saveExercise(
       new ExerciseModel(exerciseData)
     )) as Exercise
 
@@ -32,8 +36,12 @@ describe("Exercise Services", () => {
   })
 
   it("Fetching exercises successfully", async () => {
+    const createdExercise = (await exerciseServices.saveExercise(
+      new ExerciseModel(exerciseData)
+    )) as Exercise
+
     const fetchedExercise = (await exerciseServices.getExercises([
-      Types.ObjectId(createdExercise._id)
+      mongoose.Types.ObjectId(createdExercise._id)
     ])) as Exercise[]
 
     expect(fetchedExercise).toBeTruthy()
@@ -41,6 +49,7 @@ describe("Exercise Services", () => {
   })
 
   it("Inserting default exercises successfully", async () => {
+
     const exerciseDatas: Exercise[] = [
       {
         name: `Random Name: ${uuidv4()}`,

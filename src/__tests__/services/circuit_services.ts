@@ -1,36 +1,41 @@
 import {Circuit} from "../../interfaces/circuit"
 import {mongooseTestLoader} from "../../loaders/mongoose_loader"
 import * as circuitServices from "../../services/db/circuit_services"
-import {Types} from "mongoose"
+import mongoose, {Connection} from "mongoose"
 import CircuitModel from "../../models/circuit_model"
 
-let connection: any
+let connection: Connection
 
 beforeAll(async () => {
   connection = await mongooseTestLoader()
 })
 
 afterAll(async () => {
-  await connection.disconnect()
+  await (connection as any).disconnect()
+})
+
+afterEach(async () => {
+  await mongoose.connection.db.dropCollection("circuits")
 })
 
 describe("User Services", () => {
-  let circuitDocs: any
   const circuitData = {
     setAmount: 0,
     timeBetweenSetsSec: 0,
     exercises: []
   }
+
   it("Inserting circuits successfully", async () => {
-    const circuitsSampleData: Circuit[] = [circuitData, circuitData]
-    circuitDocs = await circuitServices.insertManyCircuits(circuitsSampleData)
+    const circuitDocs = await circuitServices.insertManyCircuits([circuitData, circuitData])
     expect(circuitDocs).toBeTruthy()
     expect(circuitDocs.length).toBe(2)
   })
 
   it("Fetching multiple circuits by ids successfully", async () => {
-    const circuitIds: Types.ObjectId[] = circuitDocs.map((circuit: Circuit) =>
-      Types.ObjectId(circuit._id)
+    const circuitDocs = await circuitServices.insertManyCircuits([circuitData, circuitData])
+
+    const circuitIds: mongoose.Types.ObjectId[] = circuitDocs.map((circuit: Circuit) =>
+      mongoose.Types.ObjectId(circuit._id)
     )
 
     const cirDocs: Circuit[] = await circuitServices.getCircuits(circuitIds)

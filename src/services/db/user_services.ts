@@ -34,7 +34,7 @@ const saveUser = async (user: User & Document) => {
     userDoc = await user.save()
   } catch (e) {
     console.log(`user_services[userSave]: Saving user into database failed. ${e}`)
-    return
+    return 
   }
   return userDoc
 }

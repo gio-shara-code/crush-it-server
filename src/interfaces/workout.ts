@@ -4,4 +4,5 @@ export interface Workout {
   exerciseTotalAmount?: number
   circuitIds?: String[]
   description?: string
+  _id?: string
 }

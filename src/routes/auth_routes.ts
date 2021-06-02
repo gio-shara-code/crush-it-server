@@ -1,7 +1,4 @@
 import {Request, Response} from "express"
-import config from "../config/index"
-import jwt from "jsonwebtoken"
-import * as bcrypt from "bcrypt"
 import * as userServices from "../services/db/user_services"
 import UserModel from "../models/user_model"
 import * as exerciseServices from "../services/db/exercise_services"
