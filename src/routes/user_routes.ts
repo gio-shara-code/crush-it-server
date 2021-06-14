@@ -1,18 +1,8 @@
-import {Request, Response} from "express"
-import * as userServices from "../services/db/user_services"
+import express from "express"
+import * as userControllers from "../controllers/user_controllers"
 
-const getUser = async (req: Request, res: Response) => {
-  const user = await userServices.getUserById(req.body.userId)
-  if (!user) {
-    return res.json({
-      success: false,
-      message: "User not found."
-    })
-  }
-  res.json({
-    success: true,
-    user: user
-  })
-}
+const router = express.Router()
 
-export {getUser}
+router.get("/user", userControllers.getUser)
+
+export default router

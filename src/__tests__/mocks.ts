@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken"
 
-const verifyToken = () =>
-  jest.spyOn(jwt, "verify").mockImplementationOnce(() => {
+const verifyTokenValid = () =>
+  jest.spyOn(jwt, "verify").mockImplementation((token: string, secret: any) => {
     return {id: "user_id"}
   })
 
-export {verifyToken}
+export {verifyTokenValid}

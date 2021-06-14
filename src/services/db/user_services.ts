@@ -3,16 +3,18 @@ import {Types, Document} from "mongoose"
 import {User} from "../../interfaces/user"
 
 const getUserById = async (id: string) => {
+  let userDoc
+
   try {
-    const docs = await UserModel.find({
+    userDoc = await UserModel.findOne({
       _id: new Types.ObjectId(id)
-    }) //excludes password field when retrieving user info
-    if (docs.length === 0) return
-    return docs[0]
+    })
   } catch (e) {
     console.log(`UserService[getUserById]: fetching user by id failed. ${e}`)
     return
   }
+
+  return userDoc
 }
 
 const getUserByEmail = async (email: string) => {
@@ -34,7 +36,7 @@ const saveUser = async (user: User & Document) => {
     userDoc = await user.save()
   } catch (e) {
     console.log(`user_services[userSave]: Saving user into database failed. ${e}`)
-    return 
+    return
   }
   return userDoc
 }

@@ -11,7 +11,8 @@
     "watch-ts": "tsc -w",
     "deploy": "git add . && git commit -m Heroku && git push heroku main",
     "mongoose-test": "ts-node src/mongoose_test.ts",
-    "test": "jest --config=jest.config.js --watch"
+    "test:watch": "jest --config=jest.config.js --watch",
+    "test": "jest --config=jest.config.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

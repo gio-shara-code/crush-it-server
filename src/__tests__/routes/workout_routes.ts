@@ -17,13 +17,11 @@ let connection: Connection
 beforeAll(async () => {
   connection = await mongooseTestLoader()
   app = await expressLoader(express())
+  mocks.verifyTokenValid()
 })
 
 afterAll(async () => {
   await (connection as any).disconnect()
-})
-
-afterEach(async () => {
   jest.resetAllMocks() //resets usage data but not implementation
   jest.restoreAllMocks() //resets everything, which includes usage data, implementation and mock name.
 })
@@ -38,17 +36,7 @@ describe("Workout Routes", () => {
       done()
     })
 
-    it("Inputing invalid token", async (done) => {
-      const response = await request(app)
-        .get(uri)
-        .set("authorization", "Bearer SomeRandomCharachters")
-      expect(response.body.success).toBeFalsy()
-      expect(response.status).toBe(401)
-      done()
-    })
-
     it("Fetching Empty workout list", async (done) => {
-      mocks.verifyToken()
       jest.spyOn(userServices, "getUserById").mockImplementationOnce((id: string) => {
         return {workouts: []} as any
       })
@@ -56,15 +44,12 @@ describe("Workout Routes", () => {
       const response = await request(app)
         .get(uri)
         .set("authorization", "Bearer SomeRandomCharachters")
-
       expect(response.body.success).toBeTruthy()
       expect(response.status).toBe(200)
       done()
     })
 
     it("Fetching workouts successfully", async (done) => {
-      mocks.verifyToken()
-
       const workoutSampleData = [
         {
           name: "Workout Name",
@@ -102,7 +87,6 @@ describe("Workout Routes", () => {
   describe("POST /workout", () => {
     const uri = "/workout"
     it("Adding default workout successfully", async (done) => {
-      mocks.verifyToken()
       jest
         .spyOn(circuitServices, "saveCircuit")
         .mockImplementationOnce(async (circuit: Circuit & Document) => {
@@ -133,7 +117,6 @@ describe("Workout Routes", () => {
     const uri = "/workout"
 
     it("Missing required parameters", async (done) => {
-      mocks.verifyToken()
       const response = await request(app).post(uri)
 
       expect(response.body.success).toBeFalsy()
@@ -142,7 +125,6 @@ describe("Workout Routes", () => {
     })
 
     it("Updating Workout Successfully", async (done) => {
-      mocks.verifyToken()
       const workoutData = {
         workoutName: "Workout Name",
         workoutDescription: "Desc",
