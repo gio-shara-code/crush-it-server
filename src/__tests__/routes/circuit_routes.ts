@@ -31,7 +31,7 @@ describe("Circuit Routes", () => {
   }
   describe("GET /circuits", () => {
     it("Missing neccessary fields", async (done) => {
-      mocks.verifyToken()
+      mocks.verifyTokenValid()
 
       const response: Response = await request(app)
         .get(path)
@@ -43,7 +43,7 @@ describe("Circuit Routes", () => {
     })
 
     it("Fetching circuits successfully", async (done) => {
-      mocks.verifyToken()
+      mocks.verifyTokenValid()
       jest
         .spyOn(circuitServices, "getCircuits")
         .mockImplementationOnce((circuitIds: Types.ObjectId[]) => {
@@ -64,7 +64,7 @@ describe("Circuit Routes", () => {
 
   describe("PATCH /circuits", () => {
     it("Missing neccessary fields", async (done) => {
-      mocks.verifyToken()
+      mocks.verifyTokenValid()
 
       const response: Response = await request(app)
         .patch(path)
@@ -76,7 +76,7 @@ describe("Circuit Routes", () => {
     })
 
     it("Updating circuits without changing circuits order successfully", async (done) => {
-      mocks.verifyToken()
+      mocks.verifyTokenValid()
 
       jest.spyOn(circuitServices, "bulkWrite").mockImplementationOnce((bulkWrites: any[]) => {
         return {
@@ -99,7 +99,7 @@ describe("Circuit Routes", () => {
     })
 
     it("Updating circuits with changing ciruicts order successfully", async (done) => {
-      mocks.verifyToken()
+      mocks.verifyTokenValid()
 
       jest.spyOn(circuitServices, "bulkWrite").mockImplementationOnce((bulkWrites: any[]) => {
         return {
