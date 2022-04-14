@@ -1,0 +1,3 @@
+now this shouldn't fully work.
+
+first, there will be a prompt to update the current branch to the latest commit. then the changes (this txt file) be tracked and it will be attempted to add them to the main branch.
